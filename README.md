@@ -17,7 +17,7 @@ This project is a simple personal notes app build with react.js
 3. Navigate to working directory personal-notes
 
     ```shell
-    cd personal-notes
+    cd personal-notes-spa
     ```
 
 4. Install pnpm globally for faster react installation by running the following commands:
