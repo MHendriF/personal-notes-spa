@@ -2,6 +2,7 @@ import Button from '../Elements/Buttons';
 import { showFormattedDate } from '../../utils';
 import { useDispatch } from 'react-redux';
 import { archiveNote, deleteNote } from '../../redux/slices/noteSlice';
+import { Link } from 'react-router-dom';
 
 const CardNote = (props) => {
     const { children } = props;
@@ -12,14 +13,14 @@ const CardNote = (props) => {
 };
 
 const Header = (props) => {
-    const { title, createdAt } = props;
+    const { id, title, createdAt } = props;
 
     return (
         <div className='px-5 py-5 pb-5'>
-            <a href='#'>
+            <Link to={`/notes/${id}`}>
                 <h5 className='text-xl font-semibold tracking-tight text-white'>{title.length > 30 ? `${title.substring(0, 29)}...` : title}</h5>
                 <p className='text-xs text-white'>{showFormattedDate(createdAt)}</p>
-            </a>
+            </Link>
         </div>
     );
 };

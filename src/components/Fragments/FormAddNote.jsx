@@ -13,7 +13,7 @@ const FormAddNote = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const dispatch = useDispatch();
     const titleRef = useRef(null);
-    const maxCharLimit = 50;
+    const maxCharLimit = 100;
     const remainingChars = maxCharLimit - inputTitle.length;
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const FormAddNote = () => {
             <TextareaForm
                 label='Description'
                 name='body'
-                rows='5'
+                rows='8'
                 placeholder='Note description here ....'
                 value={inputBody}
                 onInput={(e) => setInputBody(e.target.value)}></TextareaForm>

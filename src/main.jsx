@@ -7,6 +7,9 @@ import NotePage from './pages/note.jsx';
 import store from './redux/store.jsx';
 import DarkModeContextProvider from './context/DarkMode.jsx';
 import './index.css';
+import ArchivePage from './pages/archive.jsx';
+import CreateNotePage from './pages/createNote.jsx';
+import DetailNotePage from './pages/detailNote.jsx';
 
 const router = createBrowserRouter([
     {
@@ -15,8 +18,20 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/note',
+        path: '/notes',
         element: <NotePage />,
+    },
+    {
+        path: '/notes/create',
+        element: <CreateNotePage />,
+    },
+    {
+        path: '/notes/:id',
+        element: <DetailNotePage />,
+    },
+    {
+        path: '/archives',
+        element: <ArchivePage />,
     },
 ]);
 

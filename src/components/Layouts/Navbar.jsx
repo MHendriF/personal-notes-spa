@@ -1,19 +1,27 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
-import Input from '../Elements/Inputs/Input';
 
-const Navbar = (props) => {
+const Navbar = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
-    const { onInput } = props;
 
     return (
-        <div className={`flex justify-end h-20 items-center px-10 ${isDarkMode && 'bg-gray-800'} ${!isDarkMode && 'bg-blue-600 '}`}>
-            <div className='w-1/4 mr-2'>
-                <Input placeholder='Search notes...' onInput={onInput} name='search' type='text'></Input>
-            </div>
+        <div className={`flex h-20 justify-between items-center px-20 ${isDarkMode && 'bg-gray-800'} ${!isDarkMode && 'bg-blue-600 '}`}>
+            <ul className='flex'>
+                <li className='mr-6'>
+                    <Link to={`/notes`} className='text-white hover:text-blue-800'>
+                        Notes
+                    </Link>
+                </li>
+                <li className='mr-6'>
+                    <Link to={`/archives`} className='text-white hover:text-blue-800'>
+                        Archives
+                    </Link>
+                </li>
+            </ul>
             <Button
-                classname={`px-10 mx-5 rounded ${isDarkMode && 'bg-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 text-slate-800'}`}
+                classname={`rounded ${isDarkMode && 'bg-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 text-slate-800'}`}
                 onClick={() => setIsDarkMode(!isDarkMode)}>
                 {isDarkMode ? 'Light' : 'Dark'}
             </Button>
