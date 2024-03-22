@@ -21,7 +21,7 @@ const ArchivePage = () => {
     return (
         <Fragment>
             <Navbar />
-            <div className={`w-full min-h-screen  ${isDarkMode && 'bg-slate-900'}`}>
+            <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='w-full pt-20 px-20'>
                     <InputForm
                         label='Search'
@@ -38,7 +38,7 @@ const ArchivePage = () => {
                                 note.archived && (
                                     <CardNote key={note.id}>
                                         <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
-                                        <CardNote.Body title={note.title}>{note.body}</CardNote.Body>
+                                        <CardNote.Body>{note.body}</CardNote.Body>
                                         <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
                                     </CardNote>
                                 ),

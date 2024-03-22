@@ -17,10 +17,10 @@ const Header = (props) => {
 
     return (
         <div className='px-5 py-5 pb-5'>
-            <Link to={`/notes/${id}`}>
+            <Link to={`/notes/${id}`} className='text-white dark:text-white hover:underline'>
                 <h5 className='text-xl font-semibold tracking-tight text-white'>{title.length > 30 ? `${title.substring(0, 29)}...` : title}</h5>
-                <p className='text-xs text-white'>{showFormattedDate(createdAt)}</p>
             </Link>
+            <p className='text-xs text-white'>{showFormattedDate(createdAt)}</p>
         </div>
     );
 };
@@ -29,9 +29,7 @@ const Body = (props) => {
     const { children } = props;
     return (
         <div className='px-5 pb-5 h-full'>
-            <a href='#'>
-                <p className='text-m text-white'>{children.length > 200 ? `${children.substring(0, 200)}...` : children}</p>
-            </a>
+            <p className='text-m text-white'>{children.length > 200 ? `${children.substring(0, 200)}...` : children}</p>
         </div>
     );
 };

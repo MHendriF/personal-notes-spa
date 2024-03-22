@@ -10,6 +10,15 @@ const noteSlice = createSlice({
         addNote: (state, action) => {
             state.data.push(action.payload);
         },
+        updateNote: (state, action) => {
+            const item = state.data.find((note) => note.id === action.payload.id);
+            if (item) {
+                item.title = action.payload.title;
+                item.body = action.payload.body;
+            } else {
+                console.log('note not found');
+            }
+        },
         deleteNote: (state, action) => {
             state.data = state.data.filter((note) => note.id !== action.payload);
             if (state.data.length === 0) {
@@ -27,5 +36,5 @@ const noteSlice = createSlice({
     },
 });
 
-export const { addNote, deleteNote, archiveNote } = noteSlice.actions;
+export const { addNote, updateNote, deleteNote, archiveNote } = noteSlice.actions;
 export default noteSlice.reducer;

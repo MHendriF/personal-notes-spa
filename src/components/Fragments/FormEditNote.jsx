@@ -3,11 +3,13 @@ import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
 import { useDispatch } from 'react-redux';
-import { addNote } from '../../redux/slices/noteSlice';
+import { updateNote } from '../../redux/slices/noteSlice';
 import { DarkMode } from '../../context/DarkMode';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const FormAddNote = () => {
-    const [id, setId] = useState(`notes-${+new Date()}`);
+const FormEditNote = () => {
     const [inputTitle, setInputTitle] = useState('');
     const [inputBody, setInputBody] = useState('');
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
@@ -16,28 +18,21 @@ const FormAddNote = () => {
     const maxCharLimit = 100;
     const remainingChars = maxCharLimit - inputTitle.length;
 
-    useEffect(() => {
-        titleRef.current.focus();
-    }, []);
+    const { id } = useParams();
+    const notes = useSelector((state) => state.notes.data);
+    const [note, setNote] = useState({});
+    const navigate = useNavigate();
 
-    const handleAddNote = (e) => {
+    const handleUpdateNote = (e) => {
         e.preventDefault();
-        setId(Date.now());
 
-        const newNote = {
-            id: `notes-${+new Date()}`,
+        const updatedNote = {
+            id: note.id,
             title: e.target.title.value,
             body: e.target.body.value,
-            createdAt: Date.now(),
-            archived: false,
         };
-        dispatch(addNote(newNote));
-        clearInput();
-    };
-
-    const clearInput = () => {
-        setInputTitle('');
-        setInputBody('');
+        dispatch(updateNote(updatedNote));
+        navigate(`/notes/${id}`);
     };
 
     const handlerInput = (e) => {
@@ -45,8 +40,20 @@ const FormAddNote = () => {
         setInputTitle(char.slice(0, 100));
     };
 
+    const findNote = (id) => {
+        const result = notes.find((note) => note.id === id);
+        setNote(result);
+        setInputTitle(result.title);
+        setInputBody(result.body);
+    };
+
+    useEffect(() => {
+        titleRef.current.focus();
+        findNote(id);
+    }, []);
+
     return (
-        <form onSubmit={handleAddNote}>
+        <form onSubmit={handleUpdateNote}>
             <p className={`font-medium mt-3 text-end text-xs ${isDarkMode && 'text-white'} ${!isDarkMode && 'text-slate-700'}`}>
                 Remaining characters : {remainingChars}
             </p>
@@ -57,7 +64,7 @@ const FormAddNote = () => {
                 value={inputTitle}
                 placeholder='Note title here ....'
                 ref={titleRef}
-                required='true'
+                required={true}
                 onInput={(e) => handlerInput(e)}></InputForm>
             <TextareaForm
                 label='Description'
@@ -67,10 +74,10 @@ const FormAddNote = () => {
                 value={inputBody}
                 onInput={(e) => setInputBody(e.target.value)}></TextareaForm>
             <Button classname='bg-blue-600 w-full text-white' type='submit'>
-                Submit
+                Update
             </Button>
         </form>
     );
 };
 
-export default FormAddNote;
+export default FormEditNote;

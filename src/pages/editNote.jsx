@@ -1,10 +1,10 @@
 import { DarkMode } from '../context/DarkMode';
 import { useContext } from 'react';
-import FormAddNote from '../components/Fragments/FormAddNote';
 import { Fragment } from 'react';
 import Navbar from '../components/Layouts/Navbar';
+import FormEditNote from '../components/Fragments/FormEditNote';
 
-const CreateNotePage = () => {
+const EditNotePage = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
 
     return (
@@ -13,8 +13,8 @@ const CreateNotePage = () => {
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-10 pb-10'>
                     <div className='w-full max-w-3xl'>
-                        <h1 className='text-3xl font-bold mb-10 text-center text-blue-600'>Create Notes</h1>
-                        <FormAddNote />
+                        <h1 className='text-3xl font-bold mb-10 text-center text-blue-600'>Edit Notes</h1>
+                        <FormEditNote />
                     </div>
                 </div>
             </div>
@@ -22,4 +22,4 @@ const CreateNotePage = () => {
     );
 };
 
-export default CreateNotePage;
+export default EditNotePage;

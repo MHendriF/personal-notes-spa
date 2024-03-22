@@ -10,6 +10,7 @@ import './index.css';
 import ArchivePage from './pages/archive.jsx';
 import CreateNotePage from './pages/createNote.jsx';
 import DetailNotePage from './pages/detailNote.jsx';
+import EditNotePage from './pages/editNote.jsx';
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     {
         path: '/notes/:id',
         element: <DetailNotePage />,
+    },
+    {
+        path: '/notes/:id/edit',
+        element: <EditNotePage />,
     },
     {
         path: '/archives',
