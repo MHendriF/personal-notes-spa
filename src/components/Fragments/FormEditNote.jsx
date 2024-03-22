@@ -53,7 +53,7 @@ const FormEditNote = () => {
 
     return (
         <form onSubmit={handleUpdateNote}>
-            <p className={`font-medium mt-3 text-end text-xs ${isDarkMode && 'text-white'} ${!isDarkMode && 'text-slate-700'}`}>
+            <p className={`font-bold mt-3 text-end text-xs ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
                 Remaining characters : {remainingChars}
             </p>
             <InputForm
@@ -64,14 +64,16 @@ const FormEditNote = () => {
                 placeholder='Note title here ....'
                 ref={titleRef}
                 required={true}
-                onInput={(e) => handlerInput(e)}></InputForm>
+                onInput={(e) => handlerInput(e)}
+            />
             <TextareaForm
                 label='Description'
                 name='body'
                 rows='8'
                 placeholder='Note description here ....'
                 value={inputBody}
-                onInput={(e) => setInputBody(e.target.value)}></TextareaForm>
+                onInput={(e) => setInputBody(e.target.value)}
+            />
             <Button classname='bg-blue-600 w-full text-white' type='submit'>
                 Update
             </Button>

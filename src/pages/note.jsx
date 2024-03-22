@@ -44,7 +44,7 @@ const NotePage = () => {
                         label='Search'
                         name='search'
                         type='text'
-                        placeholder='Search notes....'
+                        placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
                         required={false}></InputForm>
                 </div>
