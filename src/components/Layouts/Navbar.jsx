@@ -24,12 +24,12 @@ const Navbar = () => {
                 <Link
                     to={`/notes/create`}
                     href='#'
-                    className={`font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 focus:ring-4 focus:outline-none ${isDarkMode && 'bg-blue-700 hover:bg-blue-800  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-300 dark:hover:bg-gray-400 dark:focus:ring-gray-500 text-slate-800'}`}>
+                    className={`font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 focus:ring-4 focus:outline-none ${isDarkMode && 'bg-blue-700 hover:bg-blue-800  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-300 dark:hover:bg-gray-400 dark:focus:ring-gray-500 text-gray-800'}`}>
                     + Create Notes
                 </Link>
 
                 <Button
-                    classname={`rounded focus:ring-4 focus:outline-none ${isDarkMode && 'bg-blue-700 hover:bg-blue-800  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-300 dark:hover:bg-gray-400 dark:focus:ring-gray-500 text-slate-800'}`}
+                    classname={`rounded focus:ring-4 focus:outline-none ${isDarkMode && 'bg-blue-700 hover:bg-blue-800  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-300 dark:hover:bg-gray-400 dark:focus:ring-gray-500 text-gray-800'}`}
                     onClick={() => setIsDarkMode(!isDarkMode)}>
                     {isDarkMode ? 'Light' : 'Dark'}
                 </Button>

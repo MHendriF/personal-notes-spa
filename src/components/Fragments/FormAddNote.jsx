@@ -47,7 +47,7 @@ const FormAddNote = () => {
 
     return (
         <form onSubmit={handleAddNote}>
-            <p className={`font-medium mt-3 text-end text-xs ${isDarkMode && 'text-white'} ${!isDarkMode && 'text-slate-700'}`}>
+            <p className={`font-medium mt-3 text-end text-xs ${isDarkMode && 'text-white'} ${!isDarkMode && 'text-gray-800'}`}>
                 Remaining characters : {remainingChars}
             </p>
             <InputForm
