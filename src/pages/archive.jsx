@@ -49,7 +49,7 @@ const ArchivePage = () => {
                         required={false}></InputForm>
                 </div>
 
-                <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archive</h1>
+                <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archives</h1>
                 <div ref={noteRef}>
                     <div className='flex flex-wrap w-full ml-20 mr-20'>
                         {notes.length > 0 &&
