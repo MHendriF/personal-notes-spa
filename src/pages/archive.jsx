@@ -44,6 +44,7 @@ const ArchivePage = () => {
                         label='Search'
                         name='search'
                         type='text'
+                        value={query}
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
                         required={false}></InputForm>
@@ -57,7 +58,7 @@ const ArchivePage = () => {
                                 (note) =>
                                     note.archived && (
                                         <CardNote key={note.id}>
-                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={`${note.createdAt}`}></CardNote.Header>
                                             <CardNote.Body>{note.body}</CardNote.Body>
                                             <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
                                         </CardNote>
@@ -77,7 +78,7 @@ const ArchivePage = () => {
                                 (note) =>
                                     note.archived && (
                                         <CardNote key={note.id}>
-                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={`${note.createdAt}`}></CardNote.Header>
                                             <CardNote.Body>{note.body}</CardNote.Body>
                                             <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
                                         </CardNote>

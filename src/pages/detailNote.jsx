@@ -1,24 +1,22 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { archiveNote, deleteNote } from '../redux/slices/noteSlice';
 import { DarkMode } from '../context/DarkMode';
 import Navbar from '../components/Layouts/Navbar';
-import { useEffect } from 'react';
 import { showFormattedDate } from '../utils';
-import { useDispatch } from 'react-redux';
-import { archiveNote, deleteNote } from '../redux/slices/noteSlice';
-import { Link } from 'react-router-dom';
 
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
 import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 const DetailNotePage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { id } = useParams();
     const notes = useSelector((state) => state.notes.data);
     const [note, setNote] = useState({});
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const findNote = (id) => {
         const result = notes.find((note) => note.id === id);
@@ -36,7 +34,6 @@ const DetailNotePage = () => {
 
     useEffect(() => {
         setNote(findNote(id));
-        console.log('note id: ', id);
     }, [id, notes]);
 
     return (

@@ -9,5 +9,9 @@ const DarkModeContextProvider = ({ children }) => {
     return <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>{children}</DarkModeContext.Provider>;
 };
 
+DarkModeContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
 export const DarkMode = DarkModeContext;
 export default DarkModeContextProvider;

@@ -1,7 +1,6 @@
+import { useContext, Fragment } from 'react';
 import { DarkMode } from '../context/DarkMode';
-import { useContext } from 'react';
 import FormAddNote from '../components/Fragments/FormAddNote';
-import { Fragment } from 'react';
 import Navbar from '../components/Layouts/Navbar';
 
 const CreateNotePage = () => {

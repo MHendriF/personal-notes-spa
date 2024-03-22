@@ -1,6 +1,5 @@
+import { useContext, Fragment } from 'react';
 import { DarkMode } from '../context/DarkMode';
-import { useContext } from 'react';
-import { Fragment } from 'react';
 import Navbar from '../components/Layouts/Navbar';
 import FormEditNote from '../components/Fragments/FormEditNote';
 

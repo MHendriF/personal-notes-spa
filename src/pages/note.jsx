@@ -44,9 +44,11 @@ const NotePage = () => {
                         label='Search'
                         name='search'
                         type='text'
+                        value={query}
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
-                        required={false}></InputForm>
+                        required={false}
+                    />
                 </div>
 
                 <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Notes</h1>
@@ -57,7 +59,7 @@ const NotePage = () => {
                                 (note) =>
                                     !note.archived && (
                                         <CardNote key={note.id}>
-                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={`${note.createdAt}`}></CardNote.Header>
                                             <CardNote.Body>{note.body}</CardNote.Body>
                                             <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
                                         </CardNote>
@@ -77,7 +79,7 @@ const NotePage = () => {
                                 (note) =>
                                     !note.archived && (
                                         <CardNote key={note.id}>
-                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={`${note.createdAt}`}></CardNote.Header>
                                             <CardNote.Body>{note.body}</CardNote.Body>
                                             <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
                                         </CardNote>

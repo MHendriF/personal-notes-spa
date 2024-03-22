@@ -1,11 +1,11 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import Button from '../Elements/Buttons';
-import InputForm from '../Elements/Inputs/InputForm';
-import TextareaForm from '../Elements/Inputs/TextareaForm';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addNote } from '../../redux/slices/noteSlice';
 import { DarkMode } from '../../context/DarkMode';
-import { useNavigate } from 'react-router-dom';
+import Button from '../Elements/Buttons';
+import InputForm from '../Elements/Inputs/InputForm';
+import TextareaForm from '../Elements/Inputs/TextareaForm';
 
 const FormAddNote = () => {
     const dispatch = useDispatch();
@@ -28,17 +28,11 @@ const FormAddNote = () => {
             id: `notes-${+new Date()}`,
             title: e.target.title.value,
             body: e.target.body.value,
-            createdAt: Date.now(),
+            createdAt: new Date().toISOString(),
             archived: false,
         };
         dispatch(addNote(newNote));
         navigate(`/notes`);
-        clearInput();
-    };
-
-    const clearInput = () => {
-        setInputTitle('');
-        setInputBody('');
     };
 
     const handlerInput = (e) => {
