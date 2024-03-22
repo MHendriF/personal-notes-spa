@@ -1,27 +1,26 @@
 import { useState, useContext, useRef, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateNote } from '../../redux/slices/noteSlice';
+import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
-import { useDispatch } from 'react-redux';
-import { updateNote } from '../../redux/slices/noteSlice';
-import { DarkMode } from '../../context/DarkMode';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 const FormEditNote = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const notes = useSelector((state) => state.notes.data);
+
+    const [note, setNote] = useState({});
     const [inputTitle, setInputTitle] = useState('');
     const [inputBody, setInputBody] = useState('');
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
-    const dispatch = useDispatch();
+
     const titleRef = useRef(null);
     const maxCharLimit = 100;
     const remainingChars = maxCharLimit - inputTitle.length;
-
-    const { id } = useParams();
-    const notes = useSelector((state) => state.notes.data);
-    const [note, setNote] = useState({});
-    const navigate = useNavigate();
 
     const handleUpdateNote = (e) => {
         e.preventDefault();

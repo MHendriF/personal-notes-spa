@@ -13,6 +13,23 @@ const ArchivePage = () => {
     const noteRef = useRef(null);
     const filteredNotesRef = useRef(null);
 
+    useEffect(() => {
+        if (notes.length > 0) {
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+    }, [notes]);
+
+    useEffect(() => {
+        if (query.length > 0) {
+            setFilteredNotes(notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase())));
+            noteRef.current.style.display = 'none';
+            filteredNotesRef.current.style.display = 'block';
+        } else {
+            noteRef.current.style.display = 'block';
+            filteredNotesRef.current.style.display = 'none';
+        }
+    }, [query, notes]);
+
     const handleSearch = (e) => {
         let char = e.target.value;
         setQuery(char);
@@ -28,28 +45,51 @@ const ArchivePage = () => {
                         name='search'
                         type='text'
                         placeholder='Search notes....'
-                        onInput={(e) => console.log(e.target.value)}></InputForm>
-                </div>
-                <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archive</h1>
-                <div className='flex flex-wrap ml-20 mr-20'>
-                    {notes.length > 0 &&
-                        notes.map(
-                            (note) =>
-                                note.archived && (
-                                    <CardNote key={note.id}>
-                                        <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
-                                        <CardNote.Body>{note.body}</CardNote.Body>
-                                        <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
-                                    </CardNote>
-                                ),
-                        )}
+                        onInput={(e) => handleSearch(e)}
+                        required={false}></InputForm>
                 </div>
 
-                {notes.filter((note) => note.archived).length === 0 && (
-                    <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode && 'text-white'} ${!isDarkMode && 'text-slate-700'}`}>
-                        --- Your Archive is empty ---
+                <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archive</h1>
+                <div ref={noteRef}>
+                    <div className='flex flex-wrap w-full ml-20 mr-20'>
+                        {notes.length > 0 &&
+                            notes.map(
+                                (note) =>
+                                    note.archived && (
+                                        <CardNote key={note.id}>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Body>{note.body}</CardNote.Body>
+                                            <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
+                                        </CardNote>
+                                    ),
+                            )}
                     </div>
-                )}
+                    {notes.filter((note) => note.archived).length === 0 && (
+                        <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
+                            --- Your Archive is empty ---
+                        </div>
+                    )}
+                </div>
+                <div ref={filteredNotesRef}>
+                    <div className='flex flex-wrap w-full ml-20 mr-20'>
+                        {filteredNotes.length > 0 &&
+                            filteredNotes.map(
+                                (note) =>
+                                    note.archived && (
+                                        <CardNote key={note.id}>
+                                            <CardNote.Header id={note.id} title={note.title} createdAt={note.createdAt}></CardNote.Header>
+                                            <CardNote.Body>{note.body}</CardNote.Body>
+                                            <CardNote.Footer id={note.id} archived={note.archived}></CardNote.Footer>
+                                        </CardNote>
+                                    ),
+                            )}
+                    </div>
+                    {filteredNotes.filter((note) => note.archived).length === 0 && (
+                        <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
+                            {`--- Your search results "${query}" is empty ---`}
+                        </div>
+                    )}
+                </div>
             </div>
         </Fragment>
     );

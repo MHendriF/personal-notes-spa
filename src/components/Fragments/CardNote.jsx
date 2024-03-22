@@ -1,8 +1,8 @@
-import Button from '../Elements/Buttons';
-import { showFormattedDate } from '../../utils';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { archiveNote, deleteNote } from '../../redux/slices/noteSlice';
-import { Link } from 'react-router-dom';
+import { showFormattedDate } from '../../utils';
+import Button from '../Elements/Buttons';
 
 const CardNote = (props) => {
     const { children } = props;

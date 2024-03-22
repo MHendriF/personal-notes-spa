@@ -5,13 +5,14 @@ import TextareaForm from '../Elements/Inputs/TextareaForm';
 import { useDispatch } from 'react-redux';
 import { addNote } from '../../redux/slices/noteSlice';
 import { DarkMode } from '../../context/DarkMode';
+import { useNavigate } from 'react-router-dom';
 
 const FormAddNote = () => {
-    const [id, setId] = useState(`notes-${+new Date()}`);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [inputTitle, setInputTitle] = useState('');
     const [inputBody, setInputBody] = useState('');
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
-    const dispatch = useDispatch();
     const titleRef = useRef(null);
     const maxCharLimit = 100;
     const remainingChars = maxCharLimit - inputTitle.length;
@@ -22,7 +23,6 @@ const FormAddNote = () => {
 
     const handleAddNote = (e) => {
         e.preventDefault();
-        setId(Date.now());
 
         const newNote = {
             id: `notes-${+new Date()}`,
@@ -32,6 +32,7 @@ const FormAddNote = () => {
             archived: false,
         };
         dispatch(addNote(newNote));
+        navigate(`/notes`);
         clearInput();
     };
 
