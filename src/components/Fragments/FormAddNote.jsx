@@ -64,7 +64,7 @@ const FormAddNote = () => {
             <TextareaForm
                 label='Description'
                 name='body'
-                rows='8'
+                rows={8}
                 placeholder='Note description here ....'
                 value={inputBody}
                 onInput={(e) => setInputBody(e.target.value)}

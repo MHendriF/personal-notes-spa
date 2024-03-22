@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { archiveNote, deleteNote } from '../../redux/slices/noteSlice';
+import PropTypes from 'prop-types';
 import { showFormattedDate } from '../../utils';
 import Button from '../Elements/Buttons';
 
@@ -60,5 +61,24 @@ const Footer = (props) => {
 CardNote.Header = Header;
 CardNote.Body = Body;
 CardNote.Footer = Footer;
+
+CardNote.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
+Header.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+};
+
+Body.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
+Footer.propTypes = {
+    id: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+};
 
 export default CardNote;

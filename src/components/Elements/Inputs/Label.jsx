@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { DarkMode } from '../../../context/DarkMode';
 
 const Label = (props) => {
@@ -10,6 +11,11 @@ const Label = (props) => {
             {children}
         </label>
     );
+};
+
+Label.propTypes = {
+    htmlFor: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default Label;

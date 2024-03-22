@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
 const Textarea = forwardRef((props, ref) => {
     const { rows, placeholder, name, value, onInput } = props;
@@ -15,5 +16,13 @@ const Textarea = forwardRef((props, ref) => {
         />
     );
 });
+
+Textarea.propTypes = {
+    rows: PropTypes.number.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onInput: PropTypes.func.isRequired,
+};
 
 export default Textarea;

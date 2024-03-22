@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import Label from './Label';
 import Textarea from './Textarea';
 
@@ -11,5 +12,14 @@ const TextareaForm = forwardRef((props, ref) => {
         </div>
     );
 });
+
+TextareaForm.propTypes = {
+    label: PropTypes.string.isRequired,
+    rows: PropTypes.number.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onInput: PropTypes.func.isRequired,
+};
 
 export default TextareaForm;
