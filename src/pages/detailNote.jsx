@@ -10,12 +10,13 @@ const DetailNotePage = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { id } = useParams();
     const notes = useSelector((state) => state.notes.data);
-    const [note, setNote] = useState({});
+    //const [note, setNote] = useState({});
+    const [note, setNote] = useState([]);
 
     useEffect(() => {
         console.log('notes: ', notes);
-        const note1 = notes.find((note) => note.id === id);
-        console.log('note1 results: ', note1);
+        //const note1 = notes.find((note) => note.id === id);
+        //console.log('note1 results: ', note1);
         const note2 = notes.filter((note) => note.id === id);
         console.log('note2 results: ', note2);
         //setNote(note1);
