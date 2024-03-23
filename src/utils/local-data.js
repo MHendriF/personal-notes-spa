@@ -111,4 +111,24 @@ function editNote({ id, title, body }) {
     });
 }
 
-export { getAllNotes, getActiveNotes, getArchivedNotes, deleteNote, editNote, getNote, archiveNote, unarchiveNote, addNote };
+function searchNotes(query) {
+    return notes.filter((note) => !note.archived && note.title.toLowerCase().includes(query.toLowerCase()));
+}
+
+function searchArchives(query) {
+    return notes.filter((note) => note.archived && note.title.toLowerCase().includes(query.toLowerCase()));
+}
+
+export {
+    getAllNotes,
+    getActiveNotes,
+    getArchivedNotes,
+    deleteNote,
+    editNote,
+    getNote,
+    archiveNote,
+    unarchiveNote,
+    addNote,
+    searchNotes,
+    searchArchives,
+};

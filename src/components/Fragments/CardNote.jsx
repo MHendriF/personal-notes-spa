@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { archiveNote, deleteNote } from '../../redux/slices/noteSlice';
 import PropTypes from 'prop-types';
 import { showFormattedDate } from '../../utils';
-import Button from '../Elements/Buttons';
 
 const CardNote = (props) => {
     const { children } = props;
@@ -35,32 +32,8 @@ const Body = (props) => {
     );
 };
 
-const Footer = (props) => {
-    const { id, archived } = props;
-    const dispatch = useDispatch();
-    const handleDeleteNote = (id) => {
-        dispatch(deleteNote(id));
-    };
-
-    const handleArchiveNote = (id) => {
-        dispatch(archiveNote(id));
-    };
-
-    return (
-        <div className='flex items-center justify-between px-5 pb-5'>
-            <Button onClick={() => handleDeleteNote(id)} classname='bg-red-600 text-white'>
-                Delete
-            </Button>
-            <Button onClick={() => handleArchiveNote(id)} classname='bg-orange-600 text-white'>
-                {archived ? 'Unarchive' : 'Archive'}
-            </Button>
-        </div>
-    );
-};
-
 CardNote.Header = Header;
 CardNote.Body = Body;
-CardNote.Footer = Footer;
 
 CardNote.propTypes = {
     children: PropTypes.node.isRequired,
@@ -74,11 +47,6 @@ Header.propTypes = {
 
 Body.propTypes = {
     children: PropTypes.node.isRequired,
-};
-
-Footer.propTypes = {
-    id: PropTypes.string.isRequired,
-    archived: PropTypes.bool.isRequired,
 };
 
 export default CardNote;

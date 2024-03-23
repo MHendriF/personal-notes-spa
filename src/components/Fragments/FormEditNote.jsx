@@ -1,36 +1,38 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateNote } from '../../redux/slices/noteSlice';
 import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
+import { editNote, getNote } from '../../utils/local-data';
 
 const FormEditNote = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { id } = useParams();
-    const notes = useSelector((state) => state.notes.data);
-
     const [note, setNote] = useState({});
     const [inputTitle, setInputTitle] = useState('');
     const [inputBody, setInputBody] = useState('');
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
 
     const titleRef = useRef(null);
     const maxCharLimit = 100;
     const remainingChars = maxCharLimit - inputTitle.length;
 
+    useEffect(() => {
+        titleRef.current.focus();
+        findNote(id);
+    }, []);
+
+    const findNote = (id) => {
+        const result = getNote(id);
+        setNote(result);
+        setInputTitle(result.title);
+        setInputBody(result.body);
+    };
+
     const handleUpdateNote = (e) => {
         e.preventDefault();
-
-        const updatedNote = {
-            id: note.id,
-            title: e.target.title.value,
-            body: e.target.body.value,
-        };
-        dispatch(updateNote(updatedNote));
+        editNote({ id, title: e.target.title.value, body: e.target.body.value });
         navigate(`/notes/${id}`);
     };
 
@@ -38,18 +40,6 @@ const FormEditNote = () => {
         let char = e.target.value;
         setInputTitle(char.slice(0, 100));
     };
-
-    const findNote = (id) => {
-        const result = notes.find((note) => note.id === id);
-        setNote(result);
-        setInputTitle(result.title);
-        setInputBody(result.body);
-    };
-
-    useEffect(() => {
-        titleRef.current.focus();
-        findNote(id);
-    }, []);
 
     return (
         <form onSubmit={handleUpdateNote}>

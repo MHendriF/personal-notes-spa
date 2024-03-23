@@ -1,40 +1,45 @@
 import { Fragment, useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { archiveNote, deleteNote } from '../redux/slices/noteSlice';
 import { DarkMode } from '../context/DarkMode';
 import Navbar from '../components/Layouts/Navbar';
 import { showFormattedDate } from '../utils';
 
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
 import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/local-data';
 
 const DetailNotePage = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { id } = useParams();
-    const notes = useSelector((state) => state.notes.data);
     const [note, setNote] = useState({});
 
+    useEffect(() => {
+        findNote(id);
+    }, []);
+
     const findNote = (id) => {
-        const result = notes.find((note) => note.id === id);
-        return result;
+        setNote(getNote(id));
     };
 
     const handleDeleteNote = (id) => {
-        dispatch(deleteNote(id));
-        navigate('/');
+        deleteNote(id);
+        if (note.archived) {
+            navigate(`/archives`);
+        } else {
+            navigate(`/notes`);
+        }
     };
 
     const handleArchiveNote = (id) => {
-        dispatch(archiveNote(id));
+        if (note.archived) {
+            unarchiveNote(id);
+            navigate(`/notes`);
+        } else {
+            archiveNote(id);
+            navigate(`/archives`);
+        }
     };
-
-    useEffect(() => {
-        setNote(findNote(id));
-    }, [id, notes]);
 
     return (
         <Fragment>
