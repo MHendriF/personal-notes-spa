@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getInitialData } from '../../utils';
+import { getAllNotes } from '../../utils/local-data';
 
 const noteSlice = createSlice({
     name: 'notes',
     initialState: {
-        data: JSON.parse(localStorage.getItem('notes')) || [...getInitialData()],
+        data: JSON.parse(localStorage.getItem('notes')) || [...getAllNotes()],
     },
     reducers: {
         addNote: (state, action) => {
