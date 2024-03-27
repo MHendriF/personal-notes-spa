@@ -15,9 +15,7 @@ const ArchivePage = () => {
     }, []);
 
     useEffect(() => {
-        if (query.length > 0) {
-            setNotes(searchArchives(query));
-        }
+        setNotes(searchArchives(query));
     }, [query]);
 
     const handleSearch = (e) => {

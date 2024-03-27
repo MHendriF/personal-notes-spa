@@ -15,9 +15,7 @@ const NotePage = () => {
     }, []);
 
     useEffect(() => {
-        if (query.length > 0) {
-            setNotes(searchNotes(query));
-        }
+        setNotes(searchNotes(query));
     }, [query]);
 
     const handleSearch = (e) => {
