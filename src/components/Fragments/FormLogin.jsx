@@ -5,16 +5,22 @@ import { useEffect, useState } from 'react';
 import { login } from '../../services/auth.service';
 import { DarkMode } from '../../context/DarkMode';
 import { useContext } from 'react';
+import useInput from '../../hooks/useInput';
 
 const FormLogin = () => {
+    const [email, setEmail] = useInput('');
+    const [password, setPassword] = useInput('');
     const [loginFailed, setLoginFailed] = useState('');
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode } = useContext(DarkMode);
+
+    const emailRef = useRef(null);
+    useEffect(() => {
+        emailRef.current.focus();
+    }, []);
 
     const handleLogin = (event) => {
         event.preventDefault();
-        // localStorage.setItem('email', event.target.email.value);
-        // localStorage.setItem('password', event.target.password.value);
-        // window.location.href = '/products';
+
         const data = {
             username: event.target.username.value,
             password: event.target.password.value,
@@ -30,21 +36,25 @@ const FormLogin = () => {
         });
     };
 
-    const usernameRef = useRef(null);
-    useEffect(() => {
-        usernameRef.current.focus();
-    }, []);
-
     return (
         <form onSubmit={handleLogin}>
             <InputForm
-                label='Username'
-                name='username'
-                type='text'
-                placeholder='Username'
-                ref={usernameRef}
+                label='Email'
+                name='email'
+                value={email}
+                onInput={setEmail}
+                type='email'
+                placeholder='example@email.com'
+                ref={emailRef}
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
-            <InputForm label='Password' name='password' type='password' placeholder='********' color={isDarkMode ? 'white' : 'gray'}></InputForm>
+            <InputForm
+                label='Password'
+                name='password'
+                value={password}
+                onInput={setPassword}
+                type='password'
+                placeholder='********'
+                color={isDarkMode ? 'white' : 'gray'}></InputForm>
             <Button classname=' w-full' color={'blue'} type='submit'>
                 Login
             </Button>

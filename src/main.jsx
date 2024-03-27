@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DarkModeContextProvider from './context/DarkMode.jsx';
+import { LocaleProvider } from './context/LocaleContext.jsx';
 import ErrorPage from './pages/error404.jsx';
 import NotePage from './pages/note.jsx';
 import ArchivePage from './pages/archive.jsx';
@@ -51,7 +52,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <DarkModeContextProvider>
-            <RouterProvider router={router} />
+            <LocaleProvider value={localStorage.getItem('locale') || 'id'}>
+                <RouterProvider router={router} />
+            </LocaleProvider>
         </DarkModeContextProvider>
     </React.StrictMode>,
 );

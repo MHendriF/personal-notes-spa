@@ -20,14 +20,13 @@ const Navbar = () => {
                         Archives
                     </Link>
                 </li>
+                <li className='mr-6'>
+                    <Link to={`/notes/create`} className='text-white hover:text-blue-800'>
+                        Create Notes
+                    </Link>
+                </li>
             </ul>
             <div className='flex flex-wrap'>
-                <Link
-                    to={`/notes/create`}
-                    href='#'
-                    className={`font-semibold rounded-lg text-sm px-5 py-2.5 mr-2 focus:ring-4 focus:outline-none ${isDarkMode && 'bg-blue-700 hover:bg-blue-800  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-white'} ${!isDarkMode && 'bg-gray-400 hover:bg-gray-500 dark:bg-gray-300 dark:hover:bg-gray-400 dark:focus:ring-gray-500 text-gray-800'}`}>
-                    + Create Notes
-                </Link>
                 <IconButton variant='text' color='white' size='lg' className='mr-1'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'

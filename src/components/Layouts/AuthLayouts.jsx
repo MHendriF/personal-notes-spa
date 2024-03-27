@@ -8,7 +8,7 @@ import { Typography } from '@material-tailwind/react';
 
 const AuthLayouts = (props) => {
     const { children, title, type } = props;
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode } = useContext(DarkMode);
 
     return (
         <Fragment>
