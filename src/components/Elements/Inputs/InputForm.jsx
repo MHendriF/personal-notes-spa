@@ -1,14 +1,22 @@
 import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import Input from './Input';
-import Label from './Label';
+import InputCustom from './InputCustom';
 
 const InputForm = forwardRef((props, ref) => {
-    const { label, name, value, type, placeholder, onInput, required } = props;
+    const { label, name, value, type, placeholder, onInput, required, color } = props;
     return (
         <div className='mb-6'>
-            <Label htmlFor={name}>{label}</Label>
-            <Input name={name} value={value} type={type} placeholder={placeholder} ref={ref} onInput={onInput} required={required}></Input>
+            <InputCustom
+                name={name}
+                label={label}
+                value={value}
+                type={type}
+                placeholder={placeholder}
+                ref={ref}
+                onInput={onInput}
+                required={required}
+                color={color}
+            />
         </div>
     );
 });
@@ -21,6 +29,7 @@ InputForm.propTypes = {
     value: PropTypes.string.isRequired,
     onInput: PropTypes.func.isRequired,
     required: PropTypes.bool,
+    color: PropTypes.string.isRequired,
 };
 
 export default InputForm;

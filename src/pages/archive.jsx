@@ -37,7 +37,9 @@ const ArchivePage = () => {
                         value={query}
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
-                        required={false}></InputForm>
+                        required={false}
+                        color={isDarkMode ? 'white' : 'gray'}
+                    />
                 </div>
 
                 <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archives</h1>

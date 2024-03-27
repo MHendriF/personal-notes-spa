@@ -38,6 +38,7 @@ const NotePage = () => {
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
                         required={false}
+                        color={isDarkMode ? 'white' : 'gray'}
                     />
                 </div>
 

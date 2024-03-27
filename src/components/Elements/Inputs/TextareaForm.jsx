@@ -1,14 +1,12 @@
 import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import Label from './Label';
-import Textarea from './Textarea';
+import TextareaCustom from './TextareaCustom';
 
 const TextareaForm = forwardRef((props, ref) => {
-    const { label, name, rows, placeholder, value, onInput } = props;
+    const { label, name, rows, placeholder, value, onInput, color } = props;
     return (
         <div className='mb-6'>
-            <Label htmlFor={name}>{label}</Label>
-            <Textarea name={name} value={value} rows={rows} placeholder={placeholder} ref={ref} onInput={onInput}></Textarea>
+            <TextareaCustom name={name} label={label} value={value} rows={rows} placeholder={placeholder} ref={ref} onInput={onInput} color={color} />
         </div>
     );
 });
@@ -20,6 +18,7 @@ TextareaForm.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onInput: PropTypes.func.isRequired,
+    color: PropTypes.string.isRequired,
 };
 
 export default TextareaForm;

@@ -2,6 +2,7 @@ import { useContext, Fragment } from 'react';
 import { DarkMode } from '../context/DarkMode';
 import FormAddNote from '../components/Fragments/FormAddNote';
 import Navbar from '../components/Layouts/Navbar';
+import { Typography } from '@material-tailwind/react';
 
 const CreateNotePage = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
@@ -12,7 +13,9 @@ const CreateNotePage = () => {
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-10 pb-10'>
                     <div className='w-full max-w-3xl'>
-                        <h1 className='text-3xl font-bold mb-10 text-center text-blue-600'>Create Notes</h1>
+                        <Typography variant='h2' color={`${isDarkMode ? 'white' : 'blue'}`} className='text-center'>
+                            Create Notes
+                        </Typography>
                         <FormAddNote />
                     </div>
                 </div>

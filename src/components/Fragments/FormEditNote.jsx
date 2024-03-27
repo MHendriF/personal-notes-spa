@@ -51,17 +51,19 @@ const FormEditNote = () => {
                 name='title'
                 type='text'
                 value={inputTitle}
-                placeholder='Note title here ....'
+                placeholder='Title'
                 ref={titleRef}
                 required={true}
+                color={isDarkMode ? 'white' : 'gray'}
                 onInput={(e) => handlerInput(e)}
             />
             <TextareaForm
                 label='Description'
                 name='body'
                 rows={8}
-                placeholder='Note description here ....'
+                placeholder=''
                 value={inputBody}
+                color={isDarkMode ? 'blue-gray' : 'gray'}
                 onInput={(e) => setInputBody(e.target.value)}
             />
             <Button classname='bg-blue-600 w-full text-white' type='submit'>

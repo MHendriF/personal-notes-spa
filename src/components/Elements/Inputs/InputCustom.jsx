@@ -1,30 +1,35 @@
 import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { Input } from '@material-tailwind/react';
 
-const Input = forwardRef((props, ref) => {
-    const { type, placeholder, name, value, onInput, required } = props;
+const InputCustom = forwardRef((props, ref) => {
+    const { type, label, placeholder, name, value, onInput, required, color } = props;
+
     return (
-        <input
+        <Input
             id={name}
             type={type}
-            className='text-sm border border-gray-500 rounded w-full py-2 px-3 text-slate-900 placeholder: opacity-60'
+            label={label}
             placeholder={placeholder}
             onInput={onInput}
             name={name}
             value={value}
             ref={ref}
             required={required}
+            color={color}
         />
     );
 });
 
-Input.propTypes = {
+InputCustom.propTypes = {
     type: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onInput: PropTypes.func.isRequired,
     required: PropTypes.bool,
+    color: PropTypes.string.isRequired,
 };
 
-export default Input;
+export default InputCustom;
