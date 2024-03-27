@@ -9,12 +9,22 @@ import CreateNotePage from './pages/createNote.jsx';
 import DetailNotePage from './pages/detailNote.jsx';
 import EditNotePage from './pages/editNote.jsx';
 import './index.css';
+import LoginPage from './pages/login.jsx';
+import RegisterPage from './pages/register.jsx';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <NotePage />,
         errorElement: <ErrorPage />,
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    {
+        path: '/register',
+        element: <RegisterPage />,
     },
     {
         path: '/notes',

@@ -36,7 +36,7 @@ const FormAddNote = () => {
     return (
         <form onSubmit={handleAddNote}>
             <p
-                className={`flex items-center gap-1 mb-2 text-end font-sans text-sm antialiased font-normal leading-normal ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
+                className={`flex items-center gap-1 mb-2 mt-2 text-end font-sans text-sm antialiased font-normal leading-normal ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-4 h-4 -mt-px'>
                     <path
                         fillRule='evenodd'
@@ -65,7 +65,7 @@ const FormAddNote = () => {
                 color={isDarkMode ? 'blue-gray' : 'gray'}
                 onInput={(e) => setInputBody(e.target.value)}
             />
-            <Button classname='bg-blue-600 w-full text-white' type='submit'>
+            <Button classname='w-full text-white' color='blue' type='submit'>
                 Submit
             </Button>
         </form>
