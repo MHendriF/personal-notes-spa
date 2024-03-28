@@ -42,19 +42,19 @@ const DetailNotePage = () => {
 
     const handleArchiveNote = (id) => {
         if (note.archived) {
-            archiveNote(id, (status, res) => {
+            unarchiveNote(id, (status, res) => {
                 if (status) {
-                    console.log('archiveNote: ', res);
-                    navigate(`/notes`);
+                    console.log('unarchiveNote: ', res);
+                    navigate(`/archives`);
                 } else {
                     console.log(res.message);
                 }
             });
         } else {
-            unarchiveNote(id, (status, res) => {
+            archiveNote(id, (status, res) => {
                 if (status) {
-                    console.log('unarchiveNote: ', res);
-                    navigate(`/archives`);
+                    console.log('archiveNote: ', res);
+                    navigate(`/notes`);
                 } else {
                     console.log(res.message);
                 }

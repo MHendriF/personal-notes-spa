@@ -160,17 +160,17 @@ async function deleteNote(id) {
     return { error: false, data: responseJson.data };
 }
 
-export {
-    getAccessToken,
-    putAccessToken,
-    login,
-    register,
-    getUserLogged,
-    addNote,
-    getActiveNotes,
-    getArchivedNotes,
-    getNote,
-    archiveNote,
-    unarchiveNote,
-    deleteNote,
-};
+// export {
+//     getAccessToken,
+//     putAccessToken,
+//     login,
+//     register,
+//     getUserLogged,
+//     addNote,
+//     getActiveNotes,
+//     getArchivedNotes,
+//     getNote,
+//     archiveNote,
+//     unarchiveNote,
+//     deleteNote,
+// };

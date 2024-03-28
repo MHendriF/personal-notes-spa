@@ -73,34 +73,34 @@ export const getNote = async (id, callback) => {
 
 export const archiveNote = async (id, callback) => {
     axios
-        .post(`${BASE_URL}/notes/${id}/archive`, {
+        .post(`${BASE_URL}/notes/${id}/archive`, id, {
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
-            //console.log(response.data.data);
-            callback(true, response.data.data);
+            console.log(response.data);
+            callback(true, response.data);
         })
         .catch((error) => {
-            //console.log(error.response.data);
+            console.log(error);
             callback(false, error.response.data);
         });
 };
 
 export const unarchiveNote = async (id, callback) => {
     axios
-        .post(`${BASE_URL}/notes/${id}/unarchive`, {
+        .post(`${BASE_URL}/notes/${id}/unarchive`, id, {
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
-            //console.log(response.data.data);
-            callback(true, response.data.data);
+            console.log(response.data);
+            callback(true, response.data);
         })
         .catch((error) => {
-            //console.log(error.response.data);
+            console.log(error.response.data);
             callback(false, error.response.data);
         });
 };
@@ -113,8 +113,8 @@ export const deleteNote = async (id, callback) => {
             },
         })
         .then((response) => {
-            //console.log(response.data.data);
-            callback(true, response.data.data);
+            //console.log(response.data);
+            callback(true, response.data);
         })
         .catch((error) => {
             //console.log(error.response.data);
