@@ -6,38 +6,59 @@ import { showFormattedDate } from '../utils';
 
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
 import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/local-data';
+import { archiveNote, deleteNote, getNote, unarchiveNote } from '../services/note.service';
 
 const DetailNotePage = () => {
     const navigate = useNavigate();
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode } = useContext(DarkMode);
     const { id } = useParams();
     const [note, setNote] = useState({});
 
     useEffect(() => {
-        findNote(id);
+        getNote(id, (status, res) => {
+            if (status) {
+                console.log('detail: ', res);
+                setNote(res);
+            } else {
+                console.log(res.message);
+            }
+        });
     }, []);
 
-    const findNote = (id) => {
-        setNote(getNote(id));
-    };
-
     const handleDeleteNote = (id) => {
-        deleteNote(id);
-        if (note.archived) {
-            navigate(`/archives`);
-        } else {
-            navigate(`/notes`);
-        }
+        deleteNote(id, (status, res) => {
+            if (status) {
+                console.log('deleteNote: ', res);
+                if (note.archived) {
+                    navigate(`/archives`);
+                } else {
+                    navigate(`/notes`);
+                }
+            } else {
+                console.log(res.message);
+            }
+        });
     };
 
     const handleArchiveNote = (id) => {
         if (note.archived) {
-            unarchiveNote(id);
-            navigate(`/notes`);
+            archiveNote(id, (status, res) => {
+                if (status) {
+                    console.log('archiveNote: ', res);
+                    navigate(`/notes`);
+                } else {
+                    console.log(res.message);
+                }
+            });
         } else {
-            archiveNote(id);
-            navigate(`/archives`);
+            unarchiveNote(id, (status, res) => {
+                if (status) {
+                    console.log('unarchiveNote: ', res);
+                    navigate(`/archives`);
+                } else {
+                    console.log(res.message);
+                }
+            });
         }
     };
 

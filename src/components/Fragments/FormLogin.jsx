@@ -27,9 +27,9 @@ const FormLogin = () => {
         };
         login(data, (status, res) => {
             if (status) {
-                console.log(res);
-                localStorage.setItem('accessToken', res);
-                //window.location.href = '/notes';
+                console.log(res.accessToken);
+                localStorage.setItem('accessToken', res.accessToken);
+                window.location.href = '/notes';
             } else {
                 setLoginFailed(res.message);
                 console.log(res);

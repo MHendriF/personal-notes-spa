@@ -3,7 +3,7 @@ import { DarkMode } from '../context/DarkMode';
 import Navbar from '../components/Layouts/Navbar';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { getArchivedNotes, searchArchives } from '../utils/local-data';
+import { getArchivedNotes } from '../services/note.service';
 
 const ArchivePage = () => {
     const { isDarkMode } = useContext(DarkMode);
@@ -11,12 +11,20 @@ const ArchivePage = () => {
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        setNotes(getArchivedNotes());
+        getArchivedNotes((status, res) => {
+            if (status) {
+                console.log(res);
+                setNotes(res);
+            } else {
+                //alert(res.message);
+                console.log(res.message);
+            }
+        });
     }, []);
 
-    useEffect(() => {
-        setNotes(searchArchives(query));
-    }, [query]);
+    // useEffect(() => {
+    //     setNotes(searchArchives(query));
+    // }, [query]);
 
     const handleSearch = (e) => {
         let char = e.target.value;
@@ -41,7 +49,7 @@ const ArchivePage = () => {
                 </div>
 
                 <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archives</h1>
-                <div className='flex flex-wrap w-full ml-20 mr-20'>
+                <div className='flex flex-wrap w-full mx-20'>
                     {notes.length > 0 &&
                         notes.map((note) => (
                             <CardNote key={note.id}>

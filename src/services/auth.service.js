@@ -8,7 +8,7 @@ export const login = async (data, callback) => {
         .post(`${BASE_URL}/login`, data)
         .then((response) => {
             console.log(response.data.data);
-            callback(true, response.data.data.accessToken);
+            callback(true, response.data.data);
         })
         .catch((error) => {
             console.log(error.response.data);
@@ -20,13 +20,17 @@ export const register = async (data, callback) => {
     axios
         .post(`${BASE_URL}/register`, data)
         .then((response) => {
-            //callback(true, response.data.token);
-            console.log(response);
+            console.log(response.data.data);
+            callback(true, response.data.data);
         })
         .catch((error) => {
-            console.log(error);
-            callback(false, error);
+            console.log(error.response.data);
+            callback(false, error.response.data);
         });
+};
+
+export const logout = () => {
+    localStorage.removeItem('accessToken');
 };
 
 export const getName = (accessToken) => {

@@ -3,8 +3,7 @@ import { DarkMode } from '../context/DarkMode';
 import Navbar from '../components/Layouts/Navbar';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { getActiveNotes, searchNotes } from '../utils/local-data';
-import CardNote2 from '../components/Fragments/CardNote2';
+import { getActiveNotes } from '../services/note.service';
 
 const NotePage = () => {
     const { isDarkMode } = useContext(DarkMode);
@@ -12,12 +11,20 @@ const NotePage = () => {
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        setNotes(getActiveNotes);
+        getActiveNotes((status, res) => {
+            if (status) {
+                console.log(res);
+                setNotes(res);
+            } else {
+                //alert(res.message);
+                console.log(res.message);
+            }
+        });
     }, []);
 
-    useEffect(() => {
-        setNotes(searchNotes(query));
-    }, [query]);
+    // useEffect(() => {
+    //     setNotes(searchNotes(query));
+    // }, [query]);
 
     const handleSearch = (e) => {
         let char = e.target.value;
