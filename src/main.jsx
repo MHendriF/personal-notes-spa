@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <DarkModeContextProvider>
-            <LocaleProvider value={localStorage.getItem('locale') || 'id'}>
+            <LocaleProvider>
                 <RouterProvider router={router} />
             </LocaleProvider>
         </DarkModeContextProvider>

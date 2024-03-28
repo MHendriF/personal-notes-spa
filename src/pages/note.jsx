@@ -4,6 +4,7 @@ import Navbar from '../components/Layouts/Navbar';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
 import { getActiveNotes, searchNotes } from '../utils/local-data';
+import CardNote2 from '../components/Fragments/CardNote2';
 
 const NotePage = () => {
     const { isDarkMode } = useContext(DarkMode);
@@ -41,7 +42,7 @@ const NotePage = () => {
                 </div>
 
                 <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Notes</h1>
-                <div className='flex flex-wrap w-full ml-20 mr-20'>
+                <div className='flex flex-wrap w-full mx-20'>
                     {notes.length > 0 &&
                         notes.map((note) => (
                             <CardNote key={note.id}>

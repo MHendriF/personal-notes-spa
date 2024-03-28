@@ -22,16 +22,17 @@ const FormLogin = () => {
         event.preventDefault();
 
         const data = {
-            username: event.target.username.value,
+            email: event.target.email.value,
             password: event.target.password.value,
         };
         login(data, (status, res) => {
             if (status) {
-                localStorage.setItem('token', res);
-                window.location.href = '/products';
+                console.log(res);
+                localStorage.setItem('accessToken', res);
+                //window.location.href = '/notes';
             } else {
-                setLoginFailed(res.response.data);
-                console.log(res.response.data);
+                setLoginFailed(res.message);
+                console.log(res);
             }
         });
     };

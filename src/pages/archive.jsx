@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef, useContext } from 'react';
+import { Fragment, useEffect, useState, useContext } from 'react';
 import { DarkMode } from '../context/DarkMode';
 import Navbar from '../components/Layouts/Navbar';
 import CardNote from '../components/Fragments/CardNote';
@@ -6,7 +6,7 @@ import InputForm from '../components/Elements/Inputs/InputForm';
 import { getArchivedNotes, searchArchives } from '../utils/local-data';
 
 const ArchivePage = () => {
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode } = useContext(DarkMode);
     const [query, setQuery] = useState('');
     const [notes, setNotes] = useState([]);
 

@@ -1,13 +1,35 @@
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
-export const login = (data, callback) => {
+const BASE_URL = 'https://notes-api.dicoding.dev/v1';
+
+export const login = async (data, callback) => {
     axios
-        .post('https://fakestoreapi.com/auth/login', data)
+        .post(`${BASE_URL}/login`, data)
         .then((response) => {
-            callback(true, response.data.token);
-            //console.log(response);
+            console.log(response.data.data);
+            callback(true, response.data.data.accessToken);
         })
         .catch((error) => {
+            console.log(error.response.data);
+            callback(false, error.response.data);
+        });
+};
+
+export const register = async (data, callback) => {
+    axios
+        .post(`${BASE_URL}/register`, data)
+        .then((response) => {
+            //callback(true, response.data.token);
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
             callback(false, error);
         });
+};
+
+export const getName = (accessToken) => {
+    const decoded = jwtDecode(accessToken);
+    console.log(decoded);
 };
