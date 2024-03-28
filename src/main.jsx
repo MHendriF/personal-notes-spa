@@ -12,6 +12,7 @@ import EditNotePage from './pages/editNote.jsx';
 import './index.css';
 import LoginPage from './pages/login.jsx';
 import RegisterPage from './pages/register.jsx';
+import ProfilePage from './pages/profile.jsx';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <RegisterPage />,
+    },
+    {
+        path: '/profile',
+        element: <ProfilePage />,
     },
     {
         path: '/notes',

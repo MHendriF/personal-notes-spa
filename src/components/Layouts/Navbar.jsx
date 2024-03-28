@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
 import { IconButton } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        navigate('/login');
+    };
 
     return (
         <div className={`flex h-20 justify-between items-center px-20 ${isDarkMode && 'bg-gray-800'} ${!isDarkMode && 'bg-blue-600 '}`}>
@@ -58,7 +65,7 @@ const Navbar = () => {
                         </svg>
                     )}
                 </IconButton>
-                <IconButton variant='text' size='lg' className='mr-1'>
+                <IconButton variant='text' size='lg' className='mr-1' onClick={() => navigate('/profile')}>
                     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-6 h-6'>
                         <path
                             fillRule='evenodd'
@@ -67,7 +74,7 @@ const Navbar = () => {
                         />
                     </svg>
                 </IconButton>
-                <IconButton variant='text' size='lg' className='mr-1'>
+                <IconButton variant='text' size='lg' className='mr-1' onClick={() => handleLogout()}>
                     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-6 h-6'>
                         <path
                             fillRule='evenodd'

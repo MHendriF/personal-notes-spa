@@ -4,8 +4,8 @@ import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
-import { addNote } from '../../utils/local-data';
 import useInput from '../../hooks/useInput';
+import { addNote } from '../../services/note.service';
 
 const FormAddNote = () => {
     const navigate = useNavigate();
@@ -20,11 +20,19 @@ const FormAddNote = () => {
 
     const handleAddNote = (e) => {
         e.preventDefault();
-        addNote({
+        const data = {
             title: e.target.title.value,
             body: e.target.body.value,
+        };
+
+        addNote(data, (status, res) => {
+            if (status) {
+                console.log('addNote: ', res);
+                navigate(`/notes`);
+            } else {
+                console.log(res.message);
+            }
         });
-        navigate(`/notes`);
     };
 
     return (

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import { useEffect, useState } from 'react';
-import { login } from '../../services/auth.service';
+import { login, putAccessToken } from '../../services/auth.service';
 import { DarkMode } from '../../context/DarkMode';
 import { useContext } from 'react';
 import useInput from '../../hooks/useInput';
@@ -28,7 +28,7 @@ const FormLogin = () => {
         login(data, (status, res) => {
             if (status) {
                 console.log(res.accessToken);
-                localStorage.setItem('accessToken', res.accessToken);
+                putAccessToken(res.accessToken);
                 window.location.href = '/notes';
             } else {
                 setLoginFailed(res.message);

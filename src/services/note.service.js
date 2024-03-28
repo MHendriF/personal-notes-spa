@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { getAccessToken } from './auth.service';
 
 const BASE_URL = 'https://notes-api.dicoding.dev/v1';
 
 export const addNote = async (data, callback) => {
     axios
-        .post(`${BASE_URL}/notes/`, data, {
+        .post(`${BASE_URL}/notes`, data, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -14,7 +15,7 @@ export const addNote = async (data, callback) => {
             callback(true, response.data.data);
         })
         .catch((error) => {
-            console.log(error.response.data);
+            console.log(error);
             callback(false, error.response.data);
         });
 };
@@ -23,7 +24,7 @@ export const getActiveNotes = async (callback) => {
     axios
         .get(`${BASE_URL}/notes`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -40,7 +41,7 @@ export const getArchivedNotes = async (callback) => {
     axios
         .get(`${BASE_URL}/notes/archived`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -57,7 +58,7 @@ export const getNote = async (id, callback) => {
     axios
         .get(`${BASE_URL}/notes/${id}`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -74,7 +75,7 @@ export const archiveNote = async (id, callback) => {
     axios
         .post(`${BASE_URL}/notes/${id}/archive`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -91,7 +92,7 @@ export const unarchiveNote = async (id, callback) => {
     axios
         .post(`${BASE_URL}/notes/${id}/unarchive`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
@@ -108,7 +109,7 @@ export const deleteNote = async (id, callback) => {
     axios
         .delete(`${BASE_URL}/notes/${id}`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                Authorization: `Bearer ${getAccessToken()}`,
             },
         })
         .then((response) => {
