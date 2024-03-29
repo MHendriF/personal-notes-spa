@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store.jsx';
 import DarkModeContextProvider from './context/DarkMode.jsx';
 import { LocaleProvider } from './context/LocaleContext.jsx';
 import ErrorPage from './pages/error404.jsx';
@@ -9,10 +11,10 @@ import ArchivePage from './pages/archive.jsx';
 import CreateNotePage from './pages/createNote.jsx';
 import DetailNotePage from './pages/detailNote.jsx';
 import EditNotePage from './pages/editNote.jsx';
-import './index.css';
 import LoginPage from './pages/login.jsx';
 import RegisterPage from './pages/register.jsx';
 import ProfilePage from './pages/profile.jsx';
+import './index.css';
 
 const router = createBrowserRouter([
     {
@@ -55,11 +57,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <DarkModeContextProvider>
-            <LocaleProvider>
-                <RouterProvider router={router} />
-            </LocaleProvider>
-        </DarkModeContextProvider>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <React.StrictMode>
+            <DarkModeContextProvider>
+                <LocaleProvider>
+                    <RouterProvider router={router} />
+                </LocaleProvider>
+            </DarkModeContextProvider>
+        </React.StrictMode>
+    </Provider>,
 );

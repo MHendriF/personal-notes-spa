@@ -26,6 +26,10 @@ const NotePage = () => {
     //     setNotes(searchNotes(query));
     // }, [query]);
 
+    // function searchNotes(query) {
+    //     return notes.filter((note) => !note.archived && note.title.toLowerCase().includes(query.toLowerCase()));
+    // }
+
     const handleSearch = (e) => {
         let char = e.target.value;
         setQuery(char);
