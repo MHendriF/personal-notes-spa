@@ -8,8 +8,6 @@ const Navbar = ({ authUser, logOut }) => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const navigate = useNavigate();
 
-    console.log(authUser);
-
     return (
         <div className={`flex h-20 justify-between items-center px-20 ${isDarkMode && 'bg-gray-800'} ${!isDarkMode && 'bg-blue-600 '}`}>
             <ul className='flex'>

@@ -1,64 +1,41 @@
-import { Fragment, useContext, useState, useEffect } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DarkMode } from '../context/DarkMode';
-import Navbar from '../components/Layouts/Navbar';
 import { showFormattedDate } from '../utils';
 
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
 import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { archiveNote, deleteNote, getNote, unarchiveNote } from '../services/note.service';
+
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { asyncArchiveNote, asyncDeleteNote, asyncGetNote, asyncUnarchiveNote } from '../redux/states/note/action';
 
 const DetailNotePage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
     const { id } = useParams();
-    const [note, setNote] = useState({});
+    const { note = null } = useSelector((states) => states);
 
     useEffect(() => {
-        getNote(id, (status, res) => {
-            if (status) {
-                console.log('detail: ', res);
-                setNote(res);
-            } else {
-                console.log(res.message);
-            }
-        });
-    }, []);
+        dispatch(asyncGetNote(id));
+        console.log(note);
+    }, [id, dispatch]);
+
+    if (!note) {
+        return null;
+    }
 
     const handleDeleteNote = (id) => {
-        deleteNote(id, (status, res) => {
-            if (status) {
-                console.log('deleteNote: ', res);
-                if (note.archived) {
-                    navigate(`/archives`);
-                } else {
-                    navigate(`/notes`);
-                }
-            } else {
-                console.log(res.message);
-            }
-        });
+        dispatch(asyncDeleteNote(id));
+        navigate(`/`);
     };
 
     const handleArchiveNote = (id) => {
         if (note.archived) {
-            unarchiveNote(id, (status, res) => {
-                if (status) {
-                    console.log('unarchiveNote: ', res);
-                    navigate(`/archives`);
-                } else {
-                    console.log(res.message);
-                }
-            });
+            dispatch(asyncUnarchiveNote(id));
         } else {
-            archiveNote(id, (status, res) => {
-                if (status) {
-                    console.log('archiveNote: ', res);
-                    navigate(`/notes`);
-                } else {
-                    console.log(res.message);
-                }
-            });
+            dispatch(asyncArchiveNote(id));
         }
     };
 

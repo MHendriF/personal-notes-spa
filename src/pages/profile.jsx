@@ -1,11 +1,12 @@
 import { useContext, Fragment } from 'react';
 import { DarkMode } from '../context/DarkMode';
-import Navbar from '../components/Layouts/Navbar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getUserLogged } from '../services/auth.service';
 import { Typography } from '@material-tailwind/react';
+import { useDispatch } from 'react-redux';
 const ProfilePage = () => {
+    const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
     const [user, setUser] = useState({});
 

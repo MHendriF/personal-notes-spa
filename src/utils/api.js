@@ -93,11 +93,8 @@ const api = (() => {
             throw new Error(message);
         }
 
-        const {
-            data: { note },
-        } = responseJson;
-
-        return note;
+        console.log('responseJson : ', responseJson.data);
+        return responseJson.data;
     }
 
     async function getActiveNotes() {
@@ -109,12 +106,7 @@ const api = (() => {
         if (status !== 'success') {
             throw new Error(message);
         }
-
-        const {
-            data: { notes },
-        } = responseJson;
-
-        return notes;
+        return responseJson.data;
     }
 
     async function getArchivedNotes() {
@@ -127,11 +119,8 @@ const api = (() => {
             throw new Error(message);
         }
 
-        const {
-            data: { archived },
-        } = responseJson;
-
-        return archived;
+        console.log('responseJson : ', responseJson.data);
+        return responseJson.data;
     }
 
     async function getNote(id) {
@@ -144,11 +133,8 @@ const api = (() => {
             throw new Error(message);
         }
 
-        const {
-            data: { note },
-        } = responseJson;
-
-        return note;
+        console.log('responseJson : ', responseJson.data);
+        return responseJson.data;
     }
 
     async function archiveNote(id) {
@@ -159,7 +145,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-
+        console.log('responseJson : ', responseJson);
         if (status !== 'success') {
             throw new Error(message);
         }
@@ -173,7 +159,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-
+        console.log('responseJson : ', responseJson);
         if (status !== 'success') {
             throw new Error(message);
         }
@@ -187,7 +173,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-
+        console.log('responseJson : ', responseJson);
         if (status !== 'success') {
             throw new Error(message);
         }

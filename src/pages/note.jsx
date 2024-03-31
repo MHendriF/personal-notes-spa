@@ -2,24 +2,19 @@ import { Fragment, useEffect, useState, useContext } from 'react';
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { getActiveNotes } from '../services/note.service';
+import { useSelector, useDispatch } from 'react-redux';
+import { asyncGetActiveNotes } from '../redux/states/notes/action';
 
 const NotePage = () => {
+    const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
     const [query, setQuery] = useState('');
-    const [notes, setNotes] = useState([]);
+    //const [notes, setNotes] = useState([]);
+    const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
-        getActiveNotes((status, res) => {
-            if (status) {
-                console.log(res);
-                setNotes(res);
-            } else {
-                //alert(res.message);
-                console.log(res.message);
-            }
-        });
-    }, []);
+        dispatch(asyncGetActiveNotes());
+    }, [dispatch]);
 
     // useEffect(() => {
     //     setNotes(searchNotes(query));

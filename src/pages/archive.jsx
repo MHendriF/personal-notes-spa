@@ -2,24 +2,19 @@ import { Fragment, useEffect, useState, useContext } from 'react';
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { getArchivedNotes } from '../services/note.service';
+import { useDispatch } from 'react-redux';
+import { asyncGetArchivedNotes } from '../redux/states/notes/action';
+import { useSelector } from 'react-redux';
 
 const ArchivePage = () => {
+    const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
     const [query, setQuery] = useState('');
-    const [notes, setNotes] = useState([]);
+    const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
-        getArchivedNotes((status, res) => {
-            if (status) {
-                console.log(res);
-                setNotes(res);
-            } else {
-                //alert(res.message);
-                console.log(res.message);
-            }
-        });
-    }, []);
+        dispatch(asyncGetArchivedNotes());
+    }, [dispatch]);
 
     // useEffect(() => {
     //     setNotes(searchArchives(query));

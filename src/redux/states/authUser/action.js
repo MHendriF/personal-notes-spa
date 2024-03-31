@@ -27,7 +27,7 @@ export const asyncSetAuthUser = (data) => {
             const accessToken = await api.login(data);
             api.putAccessToken(accessToken);
             const authUser = await api.getUserLogged();
-            console.log(authUser);
+            //console.log(authUser);
             dispatch(setAuthUserActionCreator(authUser));
         } catch (error) {
             alert(error.message);

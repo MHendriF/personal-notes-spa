@@ -5,10 +5,12 @@ import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
 import useInput from '../../hooks/useInput';
-import { addNote } from '../../services/note.service';
+import { useDispatch } from 'react-redux';
+import { asyncAddNote } from '../../redux/states/note/action';
 
 const FormAddNote = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [title, setTitle] = useInput('');
     const [body, setBody] = useInput('');
     const { isDarkMode } = useContext(DarkMode);
@@ -25,14 +27,8 @@ const FormAddNote = () => {
             body: e.target.body.value,
         };
 
-        addNote(data, (status, res) => {
-            if (status) {
-                console.log('addNote: ', res);
-                navigate(`/notes`);
-            } else {
-                console.log(res.message);
-            }
-        });
+        dispatch(asyncAddNote(data));
+        navigate(`/notes`);
     };
 
     return (
