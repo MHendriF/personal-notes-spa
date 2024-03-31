@@ -23,7 +23,6 @@ const ProfilePage = () => {
 
     return (
         <Fragment>
-            <Navbar />
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-20'>
                     <div className='w-full max-w-2xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>

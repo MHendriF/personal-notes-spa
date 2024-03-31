@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { DarkMode } from '../context/DarkMode';
-import Navbar from '../components/Layouts/Navbar';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
 import { getArchivedNotes } from '../services/note.service';
@@ -33,7 +32,6 @@ const ArchivePage = () => {
 
     return (
         <Fragment>
-            <Navbar />
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='w-full pt-20 px-20'>
                     <InputForm

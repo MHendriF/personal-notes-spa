@@ -2,39 +2,31 @@ import { useRef } from 'react';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import { useEffect, useState } from 'react';
-import { login, putAccessToken } from '../../services/auth.service';
 import { DarkMode } from '../../context/DarkMode';
 import { useContext } from 'react';
 import useInput from '../../hooks/useInput';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { asyncSetAuthUser } from '../../redux/states/authUser/action';
 
 const FormLogin = () => {
+    const dispatch = useDispatch();
+    const emailRef = useRef(null);
     const [email, setEmail] = useInput('');
     const [password, setPassword] = useInput('');
-    const [loginFailed, setLoginFailed] = useState('');
     const { isDarkMode } = useContext(DarkMode);
 
-    const emailRef = useRef(null);
     useEffect(() => {
         emailRef.current.focus();
     }, []);
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-
+    const handleLogin = (e) => {
+        e.preventDefault();
         const data = {
-            email: event.target.email.value,
-            password: event.target.password.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
         };
-        login(data, (status, res) => {
-            if (status) {
-                console.log(res.accessToken);
-                putAccessToken(res.accessToken);
-                window.location.href = '/notes';
-            } else {
-                setLoginFailed(res.message);
-                console.log(res);
-            }
-        });
+        dispatch(asyncSetAuthUser(data));
     };
 
     return (
@@ -56,10 +48,9 @@ const FormLogin = () => {
                 type='password'
                 placeholder='********'
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
-            <Button classname=' w-full' color={'blue'} type='submit'>
+            <Button classname='w-full' color={'blue'} type='submit'>
                 Login
             </Button>
-            {loginFailed && <p className='text-red-500 text-sm m-5 text-center'>{loginFailed}</p>}
         </form>
     );
 };

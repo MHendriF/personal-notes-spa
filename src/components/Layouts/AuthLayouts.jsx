@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
-import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { Typography } from '@material-tailwind/react';
@@ -12,7 +11,6 @@ const AuthLayouts = (props) => {
 
     return (
         <Fragment>
-            <Navbar />
             <div className={`flex justify-center min-h-screen items-center ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='w-full max-w-xs'>
                     <Typography variant='h4' color='blue'>
@@ -30,7 +28,7 @@ const AuthLayouts = (props) => {
 };
 
 const Navigation = ({ type }) => {
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode } = useContext(DarkMode);
 
     if (type === 'login') {
         return (

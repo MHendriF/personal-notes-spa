@@ -15,55 +15,19 @@ import LoginPage from './pages/login.jsx';
 import RegisterPage from './pages/register.jsx';
 import ProfilePage from './pages/profile.jsx';
 import './index.css';
-
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <NotePage />,
-        errorElement: <ErrorPage />,
-    },
-    {
-        path: '/login',
-        element: <LoginPage />,
-    },
-    {
-        path: '/register',
-        element: <RegisterPage />,
-    },
-    {
-        path: '/profile',
-        element: <ProfilePage />,
-    },
-    {
-        path: '/notes',
-        element: <NotePage />,
-    },
-    {
-        path: '/notes/create',
-        element: <CreateNotePage />,
-    },
-    {
-        path: '/notes/:id',
-        element: <DetailNotePage />,
-    },
-    {
-        path: '/notes/:id/edit',
-        element: <EditNotePage />,
-    },
-    {
-        path: '/archives',
-        element: <ArchivePage />,
-    },
-]);
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-        <React.StrictMode>
-            <DarkModeContextProvider>
-                <LocaleProvider>
-                    <RouterProvider router={router} />
-                </LocaleProvider>
-            </DarkModeContextProvider>
-        </React.StrictMode>
+        <BrowserRouter>
+            <React.StrictMode>
+                <DarkModeContextProvider>
+                    <LocaleProvider>
+                        <App />
+                    </LocaleProvider>
+                </DarkModeContextProvider>
+            </React.StrictMode>
+        </BrowserRouter>
     </Provider>,
 );
