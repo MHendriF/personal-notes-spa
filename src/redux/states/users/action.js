@@ -15,8 +15,7 @@ export const asyncRegisterUser = (data) => {
     return async (dispatch) => {
         dispatch(showLoading());
         try {
-            const response = await api.register(data);
-            console.log(response);
+            await api.register(data);
         } catch (error) {
             alert(error.message);
         }
