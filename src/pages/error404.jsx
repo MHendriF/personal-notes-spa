@@ -17,7 +17,7 @@ const ErrorPage = () => {
                 <Typography variant='h1' color={isDarkMode ? 'white' : 'blue-gray'} className='mb-4'>
                     Page Not Found
                 </Typography>
-                <Button classname='w-full' size='md' color={isDarkMode ? 'white' : 'blue'} type='button' onClick={() => navigate('/')}>
+                <Button size='md' color={isDarkMode ? 'white' : 'blue'} type='button' onClick={() => navigate(`/`)}>
                     Go back home
                 </Button>
             </div>

@@ -22,9 +22,8 @@ const FormRegister = () => {
             email: e.target.email.value,
             password: e.target.password.value,
         };
-        console.log(data);
         dispatch(asyncRegisterUser(data));
-        navigate('/');
+        navigate(`/`);
     };
 
     return (

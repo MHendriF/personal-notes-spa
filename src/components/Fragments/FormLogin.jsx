@@ -26,7 +26,7 @@ const FormLogin = () => {
             password: e.target.password.value,
         };
         dispatch(asyncSetAuthUser(data));
-        navigate('/');
+        navigate(`/`);
     };
 
     return (

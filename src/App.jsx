@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { asyncPreloadProcess } from './redux/states/isPreload/action';
 import { asyncUnsetAuthUser } from './redux/states/authUser/action';
 import LoginPage from './pages/login';
@@ -17,6 +17,7 @@ import { NavbarContainer } from './components/Layouts/NavbarContainer';
 const App = () => {
     const { authUser = null, isPreload = false } = useSelector((states) => states);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(asyncPreloadProcess());
@@ -24,6 +25,11 @@ const App = () => {
 
     const onLogOut = () => {
         dispatch(asyncUnsetAuthUser());
+        navigate(`/`);
+    };
+
+    const onNavigateToProfile = () => {
+        navigate(`/profile`);
     };
 
     if (isPreload) {
@@ -50,7 +56,7 @@ const App = () => {
             <Loading />
             <div>
                 <header>
-                    <NavbarContainer authUser={authUser} logOut={onLogOut} />
+                    <NavbarContainer authUser={authUser} logOut={onLogOut} navigateToProfile={onNavigateToProfile} />
                 </header>
                 <main>
                     <Routes>

@@ -1,13 +1,12 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import LocaleContext from '../../context/LocaleContext';
 import PropTypes from 'prop-types';
 import { Navbar, Typography, IconButton, Avatar } from '@material-tailwind/react';
 import { ArrowRightEndOnRectangleIcon, MoonIcon, LanguageIcon, SunIcon } from '@heroicons/react/24/solid';
 
-export function NavbarContainer({ authUser, logOut }) {
-    const navigate = useNavigate();
+export function NavbarContainer({ authUser, logOut, navigateToProfile }) {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { locale, toggleLocale } = useContext(LocaleContext);
 
@@ -28,7 +27,7 @@ export function NavbarContainer({ authUser, logOut }) {
                 </Typography>
 
                 <div className='ml-auto flex gap-1 md:mr-4'>
-                    <div className='flex items-center gap-2 mr-1 cursor-pointer' onClick={() => navigate('/profile')}>
+                    <div className='flex items-center gap-2 mr-1 cursor-pointer' onClick={navigateToProfile}>
                         <Avatar src='https://docs.material-tailwind.com/img/face-2.jpg' alt='avatar' size='sm' />
                         <div>
                             <Typography variant='small' color='white'>
@@ -53,5 +52,6 @@ export function NavbarContainer({ authUser, logOut }) {
 
 NavbarContainer.propTypes = {
     authUser: PropTypes.object,
-    logOut: PropTypes.func,
+    logOut: PropTypes.func.isRequired,
+    navigateToProfile: PropTypes.func.isRequired,
 };
