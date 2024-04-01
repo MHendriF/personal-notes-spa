@@ -4,9 +4,22 @@ import PropTypes from 'prop-types';
 const DarkModeContext = createContext();
 
 const DarkModeContextProvider = ({ children }) => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') || false);
 
-    return <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>{children}</DarkModeContext.Provider>;
+    const toggleTheme = () => {
+        setIsDarkMode((prevTheme) => {
+            const newTheme = prevTheme === true ? false : true;
+            localStorage.setItem('isDarkMode', newTheme);
+            return newTheme;
+        });
+    };
+
+    const contextValue = {
+        isDarkMode,
+        toggleTheme,
+    };
+
+    return <DarkModeContext.Provider value={contextValue}>{children}</DarkModeContext.Provider>;
 };
 
 DarkModeContextProvider.propTypes = {

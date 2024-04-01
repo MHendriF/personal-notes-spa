@@ -7,7 +7,7 @@ import { Navbar, Typography, IconButton, Avatar } from '@material-tailwind/react
 import { ArrowRightEndOnRectangleIcon, MoonIcon, LanguageIcon, SunIcon } from '@heroicons/react/24/solid';
 
 export function NavbarContainer({ authUser, logOut, navigateToProfile }) {
-    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    const { isDarkMode, toggleTheme } = useContext(DarkMode);
     const { locale, toggleLocale } = useContext(LocaleContext);
 
     return (
@@ -38,7 +38,7 @@ export function NavbarContainer({ authUser, logOut, navigateToProfile }) {
                     <IconButton variant='text' color='white' onClick={() => toggleLocale()}>
                         <LanguageIcon className='h-4 w-4' />
                     </IconButton>
-                    <IconButton variant='text' color='white' onClick={() => setIsDarkMode(!isDarkMode)}>
+                    <IconButton variant='text' color='white' onClick={() => toggleTheme()}>
                         {isDarkMode ? <SunIcon className='h-4 w-4' /> : <MoonIcon className='h-4 w-4' />}
                     </IconButton>
                     <IconButton variant='text' color='white' onClick={logOut}>
