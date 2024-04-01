@@ -10,7 +10,6 @@ import RegisterPage from './pages/register';
 import Loading from './components/Elements/Loadings/Loading';
 import NotePage from './pages/note';
 import DetailNotePage from './pages/detailNote';
-import EditNotePage from './pages/editNote';
 import ArchivePage from './pages/archive';
 import ProfilePage from './pages/profile';
 import ErrorPage from './pages/error404';
@@ -62,7 +61,6 @@ const App = () => {
                         <Route path='/notes' element={<NotePage />} />
                         <Route path='/notes/create' element={<CreateNotePage />} />
                         <Route path='/notes/:id' element={<DetailNotePage />} />
-                        <Route path='/notes/:id/edit' element={<EditNotePage />} />
                         <Route path='/archives' element={<ArchivePage />} />
                         <Route path='/profile' element={<ProfilePage />} />
                     </Routes>

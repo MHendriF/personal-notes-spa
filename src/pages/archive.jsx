@@ -40,7 +40,7 @@ const ArchivePage = () => {
                     />
                 </div>
 
-                <h1 className='text-3xl font-bold mb-2 pt-10 text-blue-600 ml-20'>Archives</h1>
+                <h1 className={`text-3xl font-bold mb-2 pt-10 ml-20 ${isDarkMode ? 'text-white' : 'text-blue-600'}`}>Archives</h1>
                 <div className='flex flex-wrap w-full mx-20'>
                     {notes.length > 0 &&
                         notes.map((note) => (

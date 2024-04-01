@@ -39,13 +39,17 @@ const DetailNotePage = () => {
     return (
         <Fragment>
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
-                <div className='w-full pt-20 px-20'>
-                    <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-                        <a href='#'>
-                            <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{note.title}</h5>
-                        </a>
-                        <p className='mb-3 text-sm text-gray-700 dark:text-gray-400'>{showFormattedDate(note.createdAt)}</p>
-                        <p className='mb-3 font-normal text-gray-800 dark:text-gray-200'>{note.body}</p>
+                <div className='flex items-center justify-center pt-20'>
+                    <div className='w-full mx-40 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+                        <Typography variant='h1' color='blue-gray'>
+                            {note.title}
+                        </Typography>
+                        <Typography variant='small' color='gray' className='mb-4'>
+                            {showFormattedDate(note.createdAt)}
+                        </Typography>
+                        <Typography variant='paragraph' color='gray' className='mb-1'>
+                            {note.body}
+                        </Typography>
                     </div>
                 </div>
 
@@ -58,19 +62,12 @@ const DetailNotePage = () => {
                                 </IconButton>
                             </SpeedDialHandler>
                             <SpeedDialContent>
-                                <SpeedDialAction className='h-16 w-16' onClick={() => navigate(`/notes/${note.id}/edit`)}>
-                                    <PencilSquareIcon className='h-5 w-5' />
-                                    <Typography color='blue-gray' className='text-xs font-normal'>
-                                        Edit
-                                    </Typography>
-                                </SpeedDialAction>
                                 <SpeedDialAction className='h-16 w-16' onClick={() => handleArchiveNote(note.id)}>
                                     {!note.archived ? <ArchiveBoxArrowDownIcon className='h-5 w-5' /> : <ArchiveBoxXMarkIcon className='h-5 w-5' />}
                                     <Typography color='blue-gray' className='text-xs font-normal'>
                                         {!note.archived ? 'Archive' : 'Unarchive'}
                                     </Typography>
                                 </SpeedDialAction>
-
                                 <SpeedDialAction className='h-16 w-16' onClick={() => handleDeleteNote(note.id)}>
                                     <TrashIcon className='h-5 w-5' />
                                     <Typography color='blue-gray' className='text-xs font-normal'>
