@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './redux/store.jsx';
-import DarkModeContextProvider from './context/DarkMode.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import { LocaleProvider } from './context/LocaleContext.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
@@ -12,11 +12,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
         <BrowserRouter>
             <React.StrictMode>
-                <DarkModeContextProvider>
+                <ThemeProvider>
                     <LocaleProvider>
                         <App />
                     </LocaleProvider>
-                </DarkModeContextProvider>
+                </ThemeProvider>
             </React.StrictMode>
         </BrowserRouter>
     </Provider>,

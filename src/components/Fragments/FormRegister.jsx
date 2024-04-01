@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncRegisterUser } from '../../redux/states/users/action';
 import useInput from '../../hooks/useInput';
-import { DarkMode } from '../../context/DarkMode';
+import ThemeContext from '../../context/ThemeContext';
 import LocaleContext from '../../context/LocaleContext';
 import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
@@ -14,7 +14,7 @@ const FormRegister = () => {
     const [email, setEmail] = useInput('');
     const [name, setName] = useInput('');
     const [password, setPassword] = useInput('');
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
 
     const handleRegister = (e) => {
@@ -37,7 +37,7 @@ const FormRegister = () => {
                 onInput={setName}
                 type='text'
                 placeholder='Insert your name here ....'
-                color={isDarkMode ? 'white' : 'gray'}></InputForm>
+                color={theme === 'dark' ? 'white' : 'gray'}></InputForm>
             <InputForm
                 label='Email'
                 name='email'
@@ -45,7 +45,7 @@ const FormRegister = () => {
                 onInput={setEmail}
                 type='email'
                 placeholder='example@email.com'
-                color={isDarkMode ? 'white' : 'gray'}></InputForm>
+                color={theme === 'dark' ? 'white' : 'gray'}></InputForm>
             <InputForm
                 label='Password'
                 name='password'
@@ -53,7 +53,7 @@ const FormRegister = () => {
                 onInput={setPassword}
                 type='password'
                 placeholder='********'
-                color={isDarkMode ? 'white' : 'gray'}></InputForm>
+                color={theme === 'dark' ? 'white' : 'gray'}></InputForm>
             <ButtonCostum classname='w-full' color={'blue'} type='submit'>
                 {locale === 'id' ? 'Daftar' : 'Register'}
             </ButtonCostum>

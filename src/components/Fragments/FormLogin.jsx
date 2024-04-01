@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../redux/states/authUser/action';
 import useInput from '../../hooks/useInput';
-import { DarkMode } from '../../context/DarkMode';
+import ThemeContext from '../../context/ThemeContext';
 import LocaleContext from '../../context/LocaleContext';
 import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
@@ -14,7 +14,7 @@ const FormLogin = () => {
     const emailRef = useRef(null);
     const [email, setEmail] = useInput('');
     const [password, setPassword] = useInput('');
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const FormLogin = () => {
                 type='email'
                 placeholder='example@email.com'
                 ref={emailRef}
-                color={isDarkMode ? 'white' : 'gray'}></InputForm>
+                color={theme === 'dark' ? 'white' : 'gray'}></InputForm>
             <InputForm
                 label='Password'
                 name='password'
@@ -49,7 +49,7 @@ const FormLogin = () => {
                 onInput={setPassword}
                 type='password'
                 placeholder='********'
-                color={isDarkMode ? 'white' : 'gray'}></InputForm>
+                color={theme === 'dark' ? 'white' : 'gray'}></InputForm>
             <ButtonCostum classname='w-full' color={'blue'} type='submit'>
                 {locale === 'id' ? 'Masuk' : 'Login'}
             </ButtonCostum>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncAddNote } from '../../redux/states/note/action';
 import useInput from '../../hooks/useInput';
-import { DarkMode } from '../../context/DarkMode';
+import ThemeContext from '../../context/ThemeContext';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
 import ButtonCostum from '../Elements/Buttons';
@@ -15,7 +15,7 @@ const FormAddNote = () => {
     const dispatch = useDispatch();
     const [title, setTitle] = useInput('');
     const [body, setBody] = useInput('');
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
     const titleRef = useRef(null);
 
@@ -36,7 +36,7 @@ const FormAddNote = () => {
 
     return (
         <form onSubmit={handleAddNote}>
-            <Typography variant='h2' color={`${isDarkMode ? 'white' : 'blue'}`} className='text-center mb-10'>
+            <Typography variant='h2' color={`${theme === 'dark' ? 'white' : 'blue'}`} className='text-center mb-10'>
                 {locale === 'id' ? 'Buat Catatan' : 'Create Notes'}
             </Typography>
             <InputForm
@@ -48,7 +48,7 @@ const FormAddNote = () => {
                 placeholder={locale === 'id' ? 'Judul' : 'Title'}
                 ref={titleRef}
                 required={true}
-                color={isDarkMode ? 'white' : 'gray'}
+                color={theme === 'dark' ? 'white' : 'gray'}
             />
             <TextareaForm
                 label={locale === 'id' ? 'Deskripsi' : 'Description'}
@@ -57,9 +57,9 @@ const FormAddNote = () => {
                 onInput={setBody}
                 rows={8}
                 placeholder=''
-                color={isDarkMode ? 'blue-gray' : 'gray'}
+                color={theme === 'dark' ? 'blue-gray' : 'gray'}
             />
-            <ButtonCostum classname={`w-full ${!isDarkMode && 'text-white'}`} color={isDarkMode ? 'white' : 'blue'} type='submit'>
+            <ButtonCostum classname={`w-full ${!theme === 'dark' && 'text-white'}`} color={theme === 'dark' ? 'white' : 'blue'} type='submit'>
                 Submit
             </ButtonCostum>
         </form>

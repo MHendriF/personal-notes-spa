@@ -1,13 +1,14 @@
 import { useContext, Fragment } from 'react';
-import { DarkMode } from '../context/DarkMode';
 import FormAddNote from '../components/Fragments/FormAddNote';
+import ThemeContext from '../context/ThemeContext';
 
 const CreateNotePage = () => {
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
+    console.log('isDarkMode', theme);
 
     return (
         <Fragment>
-            <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
+            <div className={`w-full min-h-screen  ${theme === 'dark' && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-10 pb-10'>
                     <div className='w-full max-w-3xl'>
                         <FormAddNote />

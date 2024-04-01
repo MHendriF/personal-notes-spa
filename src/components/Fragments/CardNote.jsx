@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { showFormattedDate } from '../../utils';
 import { useContext } from 'react';
-import { DarkMode } from '../../context/DarkMode';
+import ThemeContext from '../../context/ThemeContext';
 
 const CardNote = (props) => {
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { children } = props;
 
     return (
         <div
-            className={`w-full max-w-xs border border-white-700 rounded-lg shadow mx-2 my-2 flex flex-col justify-between text-white ${isDarkMode ? 'bg-gray-800 ' : 'bg-blue-600'}`}>
+            className={`w-full max-w-xs border border-white-700 rounded-lg shadow mx-2 my-2 flex flex-col justify-between text-white ${theme === 'dark' ? 'bg-gray-800 ' : 'bg-blue-600'}`}>
             {children}
         </div>
     );

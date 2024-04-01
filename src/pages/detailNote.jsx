@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncArchiveNote, asyncDeleteNote, asyncGetNote, asyncUnarchiveNote } from '../redux/states/note/action';
-import { DarkMode } from '../context/DarkMode';
+import ThemeContext from '../context/ThemeContext';
 import LocaleContext from '../context/LocaleContext';
 import { showFormattedDate } from '../utils';
 import { Chip, IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
@@ -11,7 +11,7 @@ import { PlusIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } fro
 const DetailNotePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
     const { id } = useParams();
     const { note = null } = useSelector((states) => states);
@@ -39,7 +39,7 @@ const DetailNotePage = () => {
 
     return (
         <Fragment>
-            <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
+            <div className={`w-full min-h-screen  ${theme === 'dark' && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-20'>
                     <div className='w-full mx-40 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
                         {note.archived && (
@@ -66,8 +66,8 @@ const DetailNotePage = () => {
                     <div className='absolute bottom-0 right-10'>
                         <SpeedDial>
                             <SpeedDialHandler>
-                                <IconButton size='lg' className={`${isDarkMode && 'bg-white'} rounded-full`}>
-                                    <PlusIcon className='h-5 w-5 transition-transform group-hover:rotate-45' color={`${isDarkMode && 'black'}`} />
+                                <IconButton size='lg' className={`${theme === 'dark' && 'bg-white'} rounded-full`}>
+                                    <PlusIcon className='h-5 w-5 transition-transform group-hover:rotate-45' color={`${theme && 'black'}`} />
                                 </IconButton>
                             </SpeedDialHandler>
                             <SpeedDialContent>

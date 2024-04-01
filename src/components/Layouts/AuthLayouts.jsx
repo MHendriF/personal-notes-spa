@@ -1,23 +1,23 @@
 import { useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { DarkMode } from '../../context/DarkMode';
+import ThemeContext from '../../context/ThemeContext';
+import LocaleContext from '../../context/LocaleContext';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-tailwind/react';
-import LocaleContext from '../../context/LocaleContext';
 
 const AuthLayouts = (props) => {
     const { children, title, type } = props;
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
 
     return (
         <Fragment>
-            <div className={`flex justify-center min-h-screen items-center ${isDarkMode && 'bg-gray-900'}`}>
+            <div className={`flex justify-center min-h-screen items-center ${theme === 'dark' && 'bg-gray-900'}`}>
                 <div className='w-full max-w-xs'>
                     <Typography variant='h4' color='blue'>
                         {title}
                     </Typography>
-                    <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-1 mb-8 font-normal'>
+                    <Typography color={theme === 'dark' ? 'white' : 'gray'} className='mt-1 mb-8 font-normal'>
                         {locale === 'id' ? 'Silahkan lengkapi data di bawah ini' : 'Welcome, please enter your details'}
                     </Typography>
                     {children}
@@ -29,12 +29,12 @@ const AuthLayouts = (props) => {
 };
 
 const Navigation = ({ type }) => {
-    const { isDarkMode } = useContext(DarkMode);
+    const { theme } = useContext(ThemeContext);
     const { locale } = useContext(LocaleContext);
 
     if (type === 'login') {
         return (
-            <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
+            <Typography color={theme === 'dark' ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
                 {locale === 'id' ? 'Belum punya akun? ' : `Don't have an account? `}
                 <Link to='/register' className='text-blue-600 font-semibold'>
                     {locale === 'id' ? 'Daftar' : 'Register'}
@@ -43,7 +43,7 @@ const Navigation = ({ type }) => {
         );
     } else {
         return (
-            <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
+            <Typography color={theme === 'dark' ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
                 {locale === 'id' ? 'Sudah punya akun? ' : 'Have an account? '}
                 <Link to='/' className='text-blue-600 font-semibold'>
                     {locale === 'id' ? 'Masuk' : 'Login'}
