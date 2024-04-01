@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-tailwind/react';
+import LocaleContext from '../../context/LocaleContext';
 
 const AuthLayouts = (props) => {
     const { children, title, type } = props;
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
 
     return (
         <Fragment>
@@ -16,7 +18,7 @@ const AuthLayouts = (props) => {
                         {title}
                     </Typography>
                     <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-1 mb-8 font-normal'>
-                        Welcome, please enter your details
+                        {locale === 'id' ? 'Silahkan lengkapi data di bawah ini' : 'Welcome, please enter your details'}
                     </Typography>
                     {children}
                     <Navigation type={type} />
@@ -28,22 +30,23 @@ const AuthLayouts = (props) => {
 
 const Navigation = ({ type }) => {
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
 
     if (type === 'login') {
         return (
             <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
-                Don't have an account?{' '}
+                {locale === 'id' ? 'Belum punya akun? ' : `Don't have an account? `}
                 <Link to='/register' className='text-blue-600 font-semibold'>
-                    Register
+                    {locale === 'id' ? 'Daftar' : 'Register'}
                 </Link>
             </Typography>
         );
     } else {
         return (
             <Typography color={isDarkMode ? 'white' : 'gray'} className='mt-5 mb-8 text-center' variant='small'>
-                Have an account?{' '}
-                <Link to='/login' className='text-blue-600 font-semibold'>
-                    Login
+                {locale === 'id' ? 'Sudah punya akun? ' : 'Have an account? '}
+                <Link to='/' className='text-blue-600 font-semibold'>
+                    {locale === 'id' ? 'Masuk' : 'Login'}
                 </Link>
             </Typography>
         );

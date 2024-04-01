@@ -7,6 +7,8 @@ import { DarkMode } from '../../context/DarkMode';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
 import ButtonCostum from '../Elements/Buttons';
+import LocaleContext from '../../context/LocaleContext';
+import { Typography } from '@material-tailwind/react';
 
 const FormAddNote = () => {
     const navigate = useNavigate();
@@ -14,6 +16,7 @@ const FormAddNote = () => {
     const [title, setTitle] = useInput('');
     const [body, setBody] = useInput('');
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
     const titleRef = useRef(null);
 
     useEffect(() => {
@@ -33,19 +36,22 @@ const FormAddNote = () => {
 
     return (
         <form onSubmit={handleAddNote}>
+            <Typography variant='h2' color={`${isDarkMode ? 'white' : 'blue'}`} className='text-center mb-10'>
+                {locale === 'id' ? 'Buat Catatan' : 'Create Notes'}
+            </Typography>
             <InputForm
-                label='Title'
+                label={locale === 'id' ? 'Judul' : 'Title'}
                 name='title'
                 type='text'
                 value={title}
                 onInput={setTitle}
-                placeholder='Title'
+                placeholder={locale === 'id' ? 'Judul' : 'Title'}
                 ref={titleRef}
                 required={true}
                 color={isDarkMode ? 'white' : 'gray'}
             />
             <TextareaForm
-                label='Description'
+                label={locale === 'id' ? 'Deskripsi' : 'Description'}
                 name='body'
                 value={body}
                 onInput={setBody}

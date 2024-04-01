@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { asyncRegisterUser } from '../../redux/states/users/action';
 import useInput from '../../hooks/useInput';
 import { DarkMode } from '../../context/DarkMode';
+import LocaleContext from '../../context/LocaleContext';
 import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 
@@ -14,6 +15,7 @@ const FormRegister = () => {
     const [name, setName] = useInput('');
     const [password, setPassword] = useInput('');
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -53,7 +55,7 @@ const FormRegister = () => {
                 placeholder='********'
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
             <ButtonCostum classname='w-full' color={'blue'} type='submit'>
-                Register
+                {locale === 'id' ? 'Daftar' : 'Register'}
             </ButtonCostum>
         </form>
     );

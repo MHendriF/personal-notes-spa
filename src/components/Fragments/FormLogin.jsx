@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../redux/states/authUser/action';
 import useInput from '../../hooks/useInput';
+import { DarkMode } from '../../context/DarkMode';
+import LocaleContext from '../../context/LocaleContext';
 import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
-import { DarkMode } from '../../context/DarkMode';
 
 const FormLogin = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const FormLogin = () => {
     const [email, setEmail] = useInput('');
     const [password, setPassword] = useInput('');
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
 
     useEffect(() => {
         emailRef.current.focus();
@@ -49,7 +51,7 @@ const FormLogin = () => {
                 placeholder='********'
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
             <ButtonCostum classname='w-full' color={'blue'} type='submit'>
-                Login
+                {locale === 'id' ? 'Masuk' : 'Login'}
             </ButtonCostum>
         </form>
     );
