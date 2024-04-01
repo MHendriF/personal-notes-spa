@@ -3,26 +3,26 @@ import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
 import { useDispatch } from 'react-redux';
-import { asyncGetArchivedNotes } from '../redux/states/notes/action';
+import { asyncGetArchivedNotes, asyncSearchArchivedNotes } from '../redux/states/notes/action';
 import { useSelector } from 'react-redux';
 
 const ArchivePage = () => {
     const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
-    const [query, setQuery] = useState('');
+    const [keyword, setKeyword] = useState('');
     const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
         dispatch(asyncGetArchivedNotes());
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     setNotes(searchArchives(query));
-    // }, [query]);
+    useEffect(() => {
+        dispatch(asyncSearchArchivedNotes(keyword));
+    }, [keyword]);
 
     const handleSearch = (e) => {
         let char = e.target.value;
-        setQuery(char);
+        setKeyword(char);
     };
 
     return (
@@ -33,7 +33,7 @@ const ArchivePage = () => {
                         label='Search'
                         name='search'
                         type='text'
-                        value={query}
+                        value={keyword}
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
                         required={false}
@@ -53,7 +53,7 @@ const ArchivePage = () => {
                 </div>
                 {notes.length === 0 && (
                     <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
-                        {`${query.length > 0 ? `--- Your search results "${query}" is empty ---` : `--- Your Archives is empty ---`}`}
+                        {`${keyword.length > 0 ? `--- Your search results "${keyword}" is empty ---` : `--- Your Archives is empty ---`}`}
                     </div>
                 )}
             </div>

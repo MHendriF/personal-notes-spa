@@ -3,30 +3,26 @@ import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
 import { useSelector, useDispatch } from 'react-redux';
-import { asyncGetActiveNotes } from '../redux/states/notes/action';
+import { asyncGetActiveNotes, asyncSearchActiveNotes } from '../redux/states/notes/action';
 
 const NotePage = () => {
     const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
-    const [query, setQuery] = useState('');
-    //const [notes, setNotes] = useState([]);
+    const [keyword, setKeyword] = useState('');
     const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
         dispatch(asyncGetActiveNotes());
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     setNotes(searchNotes(query));
-    // }, [query]);
-
-    // function searchNotes(query) {
-    //     return notes.filter((note) => !note.archived && note.title.toLowerCase().includes(query.toLowerCase()));
-    // }
+    useEffect(() => {
+        dispatch(asyncSearchActiveNotes(keyword));
+    }, [keyword]);
 
     const handleSearch = (e) => {
         let char = e.target.value;
-        setQuery(char);
+        console.log(char);
+        setKeyword(char);
     };
 
     return (
@@ -37,7 +33,7 @@ const NotePage = () => {
                         label='Search'
                         name='search'
                         type='text'
-                        value={query}
+                        value={keyword}
                         placeholder='Search by title....'
                         onInput={(e) => handleSearch(e)}
                         required={false}
@@ -57,7 +53,7 @@ const NotePage = () => {
                 </div>
                 {notes.length === 0 && (
                     <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
-                        {`${query.length > 0 ? `--- Your search results "${query}" is empty ---` : `--- Your Notes is empty ---`}`}
+                        {`${keyword.length > 0 ? `--- Your search results "${keyword}" is empty ---` : `--- Your Notes is empty ---`}`}
                     </div>
                 )}
             </div>

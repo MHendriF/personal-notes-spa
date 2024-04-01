@@ -19,7 +19,6 @@ const DetailNotePage = () => {
 
     useEffect(() => {
         dispatch(asyncGetNote(id));
-        console.log(note);
     }, [id, dispatch]);
 
     if (!note) {

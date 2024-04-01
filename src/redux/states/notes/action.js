@@ -20,6 +20,26 @@ export const getArchivedNotesActionCreator = (notes) => {
     };
 };
 
+export const searchActiveNotesActionCreator = (notes, keyword) => {
+    return {
+        type: ActionType.SEARCH_ACTIVE_NOTES,
+        payload: {
+            notes,
+            keyword,
+        },
+    };
+};
+
+export const searchArchivedNotesActionCreator = (notes, keyword) => {
+    return {
+        type: ActionType.SEARCH_ARCHIVED_NOTES,
+        payload: {
+            notes,
+            keyword,
+        },
+    };
+};
+
 export const asyncGetActiveNotes = () => {
     return async (dispatch) => {
         dispatch(showLoading());
@@ -43,6 +63,36 @@ export const asyncGetArchivedNotes = () => {
             const notes = dispatch(getArchivedNotesActionCreator(response));
             console.log('asyncGetArchivedNotes : ', response);
             console.log('dispatch : ', notes);
+        } catch (error) {
+            alert(error.message);
+        }
+        dispatch(hideLoading());
+    };
+};
+
+export const asyncSearchActiveNotes = (keyword) => {
+    return async (dispatch) => {
+        dispatch(showLoading());
+        try {
+            const notes = await api.getActiveNotes();
+            const result = dispatch(searchActiveNotesActionCreator(notes, keyword));
+            console.log('asyncSearchActiveNotes : ', notes);
+            console.log('dispatch : ', result);
+        } catch (error) {
+            alert(error.message);
+        }
+        dispatch(hideLoading());
+    };
+};
+
+export const asyncSearchArchivedNotes = (keyword) => {
+    return async (dispatch) => {
+        dispatch(showLoading());
+        try {
+            const notes = await api.getArchivedNotes();
+            const result = dispatch(searchArchivedNotesActionCreator(notes, keyword));
+            console.log('asyncSearchArchivedNotes : ', notes);
+            console.log('dispatch : ', result);
         } catch (error) {
             alert(error.message);
         }
