@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { asyncRegisterUser } from '../../redux/states/users/action';
 import useInput from '../../hooks/useInput';
 import { DarkMode } from '../../context/DarkMode';
-import Button from '../Elements/Buttons';
+import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 
 const FormRegister = () => {
@@ -53,9 +53,9 @@ const FormRegister = () => {
                 type='password'
                 placeholder='********'
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
-            <Button classname='w-full' color={'blue'} type='submit'>
+            <ButtonCostum classname='w-full' color={'blue'} type='submit'>
                 Register
-            </Button>
+            </ButtonCostum>
         </form>
     );
 };

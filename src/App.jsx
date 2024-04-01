@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { asyncPreloadProcess } from './redux/states/isPreload/action';
 import { asyncUnsetAuthUser } from './redux/states/authUser/action';
 import LoginPage from './pages/login';
@@ -14,8 +12,7 @@ import ArchivePage from './pages/archive';
 import ProfilePage from './pages/profile';
 import ErrorPage from './pages/error404';
 import CreateNotePage from './pages/createNote';
-import Navbar from './components/Layouts/Navbar';
-import { NavbarDark } from './components/Layouts/NavbarDark';
+import { NavbarContainer } from './components/Layouts/NavbarContainer';
 
 const App = () => {
     const { authUser = null, isPreload = false } = useSelector((states) => states);
@@ -39,7 +36,8 @@ const App = () => {
                 <Loading />
                 <main>
                     <Routes>
-                        <Route path='/*' element={<LoginPage />} errorElement={<ErrorPage />} />
+                        <Route path='*' element={<ErrorPage />} />
+                        <Route path='/' element={<LoginPage />} />
                         <Route path='/register' element={<RegisterPage />} />
                     </Routes>
                 </main>
@@ -50,14 +48,14 @@ const App = () => {
     return (
         <>
             <Loading />
-            <div className='app-container'>
+            <div>
                 <header>
-                    {/* <Navbar authUser={authUser} logOut={onLogOut} /> */}
-                    <NavbarDark authUser={authUser} logOut={onLogOut} />
+                    <NavbarContainer authUser={authUser} logOut={onLogOut} />
                 </header>
                 <main>
                     <Routes>
-                        <Route path='/' element={<NotePage />} errorElement={<ErrorPage />} />
+                        <Route path='*' element={<ErrorPage />} />
+                        <Route path='/' element={<NotePage />} />
                         <Route path='/notes' element={<NotePage />} />
                         <Route path='/notes/create' element={<CreateNotePage />} />
                         <Route path='/notes/:id' element={<DetailNotePage />} />

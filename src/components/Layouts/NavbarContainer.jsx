@@ -3,12 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import LocaleContext from '../../context/LocaleContext';
 import PropTypes from 'prop-types';
-import { Avatar } from '@material-tailwind/react';
-
-import { Navbar, Typography, IconButton } from '@material-tailwind/react';
+import { Navbar, Typography, IconButton, Avatar } from '@material-tailwind/react';
 import { ArrowRightEndOnRectangleIcon, MoonIcon, LanguageIcon, SunIcon } from '@heroicons/react/24/solid';
 
-export function NavbarDark({ authUser, logOut }) {
+export function NavbarContainer({ authUser, logOut }) {
     const navigate = useNavigate();
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const { locale, toggleLocale } = useContext(LocaleContext);
@@ -53,7 +51,7 @@ export function NavbarDark({ authUser, logOut }) {
     );
 }
 
-NavbarDark.propTypes = {
+NavbarContainer.propTypes = {
     authUser: PropTypes.object,
     logOut: PropTypes.func,
 };

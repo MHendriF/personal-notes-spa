@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../redux/states/authUser/action';
 import useInput from '../../hooks/useInput';
-import Button from '../Elements/Buttons';
+import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import { DarkMode } from '../../context/DarkMode';
 
@@ -48,9 +48,9 @@ const FormLogin = () => {
                 type='password'
                 placeholder='********'
                 color={isDarkMode ? 'white' : 'gray'}></InputForm>
-            <Button classname='w-full' color={'blue'} type='submit'>
+            <ButtonCostum classname='w-full' color={'blue'} type='submit'>
                 Login
-            </Button>
+            </ButtonCostum>
         </form>
     );
 };

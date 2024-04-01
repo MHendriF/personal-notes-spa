@@ -21,7 +21,7 @@ const Header = (props) => {
 
     return (
         <div className='px-5 py-5 pb-5'>
-            <Link to={`/notes/${id}`} className='    dark:text-white hover:underline'>
+            <Link to={`/notes/${id}`} className='dark:text-white hover:underline'>
                 <h5 className='text-xl font-semibold tracking-tight '>{title.length > 30 ? `${title.substring(0, 29)}...` : title}</h5>
             </Link>
             <p className='text-xs '>{showFormattedDate(createdAt)}</p>

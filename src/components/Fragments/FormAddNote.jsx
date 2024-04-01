@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { asyncAddNote } from '../../redux/states/note/action';
 import useInput from '../../hooks/useInput';
 import { DarkMode } from '../../context/DarkMode';
-import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
+import ButtonCostum from '../Elements/Buttons';
 
 const FormAddNote = () => {
     const navigate = useNavigate();
@@ -53,9 +53,9 @@ const FormAddNote = () => {
                 placeholder=''
                 color={isDarkMode ? 'blue-gray' : 'gray'}
             />
-            <Button classname={`w-full ${!isDarkMode && 'text-white'}`} color={isDarkMode ? 'white' : 'blue'} type='submit'>
+            <ButtonCostum classname={`w-full ${!isDarkMode && 'text-white'}`} color={isDarkMode ? 'white' : 'blue'} type='submit'>
                 Submit
-            </Button>
+            </ButtonCostum>
         </form>
     );
 };
