@@ -67,7 +67,10 @@ const DetailNotePage = () => {
                         <SpeedDial>
                             <SpeedDialHandler>
                                 <IconButton size='lg' className={`${theme === 'dark' && 'bg-white'} rounded-full`}>
-                                    <PlusIcon className='h-5 w-5 transition-transform group-hover:rotate-45' color={`${theme && 'black'}`} />
+                                    <PlusIcon
+                                        className='h-5 w-5 transition-transform group-hover:rotate-45'
+                                        color={`${theme === 'dark' && 'black'}`}
+                                    />
                                 </IconButton>
                             </SpeedDialHandler>
                             <SpeedDialContent>
