@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { DarkMode } from '../../context/DarkMode';
-import Button from '../Elements/Buttons';
-import InputForm from '../Elements/Inputs/InputForm';
-import useInput from '../../hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncRegisterUser } from '../../redux/states/users/action';
+import useInput from '../../hooks/useInput';
+import { DarkMode } from '../../context/DarkMode';
+import Button from '../Elements/Buttons';
+import InputForm from '../Elements/Inputs/InputForm';
 
 const FormRegister = () => {
     const navigate = useNavigate();

@@ -1,12 +1,12 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { asyncAddNote } from '../../redux/states/note/action';
+import useInput from '../../hooks/useInput';
 import { DarkMode } from '../../context/DarkMode';
 import Button from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
 import TextareaForm from '../Elements/Inputs/TextareaForm';
-import useInput from '../../hooks/useInput';
-import { useDispatch } from 'react-redux';
-import { asyncAddNote } from '../../redux/states/note/action';
 
 const FormAddNote = () => {
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ const FormAddNote = () => {
                 placeholder=''
                 color={isDarkMode ? 'blue-gray' : 'gray'}
             />
-            <Button classname='w-full text-white' color='blue' type='submit'>
+            <Button classname={`w-full ${!isDarkMode && 'text-white'}`} color={isDarkMode ? 'white' : 'blue'} type='submit'>
                 Submit
             </Button>
         </form>

@@ -19,10 +19,8 @@ export const asyncPreloadProcess = () => {
             const authUser = await api.getUserLogged();
             dispatch(setAuthUserActionCreator(authUser));
         } catch (error) {
-            console.log(error);
             dispatch(setAuthUserActionCreator(null));
         } finally {
-            console.log('setAuthUserActionCreator: ', false);
             dispatch(setIsPreloadActionCreator(false));
         }
         dispatch(hideLoading());

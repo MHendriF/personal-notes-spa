@@ -20,6 +20,15 @@ export const unsetAuthUserActionCreator = () => {
     };
 };
 
+export const getAuthUserActionCreator = () => {
+    return {
+        type: ActionType.GET_AUTH_USER,
+        payload: {
+            authUser,
+        },
+    };
+};
+
 export const asyncSetAuthUser = (data) => {
     return async (dispatch) => {
         dispatch(showLoading());
@@ -27,7 +36,6 @@ export const asyncSetAuthUser = (data) => {
             const accessToken = await api.login(data);
             api.putAccessToken(accessToken);
             const authUser = await api.getUserLogged();
-            //console.log(authUser);
             dispatch(setAuthUserActionCreator(authUser));
         } catch (error) {
             alert(error.message);
@@ -41,6 +49,19 @@ export const asyncUnsetAuthUser = () => {
         dispatch(showLoading());
         dispatch(unsetAuthUserActionCreator());
         api.putAccessToken('');
+        dispatch(hideLoading());
+    };
+};
+
+export const asyncGetAuthUser = () => {
+    return async (dispatch) => {
+        dispatch(showLoading());
+        try {
+            const authUser = await api.getUserLogged();
+            dispatch(setAuthUserActionCreator(authUser));
+        } catch (error) {
+            alert(error.message);
+        }
         dispatch(hideLoading());
     };
 };

@@ -16,6 +16,7 @@ import ProfilePage from './pages/profile';
 import ErrorPage from './pages/error404';
 import CreateNotePage from './pages/createNote';
 import Navbar from './components/Layouts/Navbar';
+import { NavbarDark } from './components/Layouts/NavbarDark';
 
 const App = () => {
     const { authUser = null, isPreload = false } = useSelector((states) => states);
@@ -37,7 +38,6 @@ const App = () => {
         return (
             <>
                 <Loading />
-
                 <main>
                     <Routes>
                         <Route path='/*' element={<LoginPage />} errorElement={<ErrorPage />} />
@@ -53,7 +53,8 @@ const App = () => {
             <Loading />
             <div className='app-container'>
                 <header>
-                    <Navbar authUser={authUser} logOut={onLogOut} />
+                    {/* <Navbar authUser={authUser} logOut={onLogOut} /> */}
+                    <NavbarDark authUser={authUser} logOut={onLogOut} />
                 </header>
                 <main>
                     <Routes>

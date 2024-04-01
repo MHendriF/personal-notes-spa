@@ -1,14 +1,14 @@
-import { useRef } from 'react';
-import Button from '../Elements/Buttons';
-import InputForm from '../Elements/Inputs/InputForm';
-import { useEffect, useState } from 'react';
-import { DarkMode } from '../../context/DarkMode';
-import { useContext } from 'react';
-import useInput from '../../hooks/useInput';
+import { useEffect, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../redux/states/authUser/action';
+import useInput from '../../hooks/useInput';
+import Button from '../Elements/Buttons';
+import InputForm from '../Elements/Inputs/InputForm';
+import { DarkMode } from '../../context/DarkMode';
 
 const FormLogin = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const emailRef = useRef(null);
     const [email, setEmail] = useInput('');
@@ -26,6 +26,7 @@ const FormLogin = () => {
             password: e.target.password.value,
         };
         dispatch(asyncSetAuthUser(data));
+        navigate('/');
     };
 
     return (

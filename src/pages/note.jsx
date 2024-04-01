@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncGetActiveNotes, asyncSearchActiveNotes } from '../redux/states/notes/action';
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { useSelector, useDispatch } from 'react-redux';
-import { asyncGetActiveNotes, asyncSearchActiveNotes } from '../redux/states/notes/action';
 
 const NotePage = () => {
     const dispatch = useDispatch();

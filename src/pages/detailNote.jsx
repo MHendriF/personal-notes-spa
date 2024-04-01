@@ -1,14 +1,12 @@
 import { Fragment, useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { asyncArchiveNote, asyncDeleteNote, asyncGetNote, asyncUnarchiveNote } from '../redux/states/note/action';
 import { DarkMode } from '../context/DarkMode';
 import { showFormattedDate } from '../utils';
 
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
 import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
-
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { asyncArchiveNote, asyncDeleteNote, asyncGetNote, asyncUnarchiveNote } from '../redux/states/note/action';
 
 const DetailNotePage = () => {
     const navigate = useNavigate();

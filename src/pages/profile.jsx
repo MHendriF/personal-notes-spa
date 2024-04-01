@@ -1,26 +1,11 @@
 import { useContext, Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { DarkMode } from '../context/DarkMode';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { getUserLogged } from '../services/auth.service';
 import { Typography } from '@material-tailwind/react';
-import { useDispatch } from 'react-redux';
-const ProfilePage = () => {
-    const dispatch = useDispatch();
-    const { isDarkMode } = useContext(DarkMode);
-    const [user, setUser] = useState({});
 
-    useEffect(() => {
-        getUserLogged((status, res) => {
-            if (status) {
-                console.log('getUserLogged: ', res);
-                setUser(res);
-                console.log('user: ', user.name);
-            } else {
-                console.log(res.message);
-            }
-        });
-    }, []);
+const ProfilePage = () => {
+    const { isDarkMode } = useContext(DarkMode);
+    const { authUser = null } = useSelector((states) => states);
 
     return (
         <Fragment>
@@ -31,13 +16,13 @@ const ProfilePage = () => {
                             Profile
                         </Typography>
                         <Typography variant='paragraph' color='gray' className='mb-1'>
-                            ID: {user.id}
+                            ID: {authUser.id}
                         </Typography>
                         <Typography variant='paragraph' color='gray' className='mb-1'>
-                            Name: {user.name}
+                            Name: {authUser.name}
                         </Typography>
                         <Typography variant='paragraph' color='gray' className='mb-1'>
-                            Email: {user.email}
+                            Email: {authUser.email}
                         </Typography>
                     </div>
                 </div>

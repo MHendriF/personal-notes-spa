@@ -1,15 +1,17 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import { IconButton } from '@material-tailwind/react';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Avatar } from '@material-tailwind/react';
+import { Typography } from '@material-tailwind/react';
 
 const Navbar = ({ authUser, logOut }) => {
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
     const navigate = useNavigate();
 
     return (
-        <div className={`flex h-20 justify-between items-center px-20 ${isDarkMode && 'bg-gray-800'} ${!isDarkMode && 'bg-blue-600 '}`}>
+        <div className={`flex h-20 justify-between items-center px-20 ${isDarkMode ? 'bg-gray-800' : 'bg-blue-600'}`}>
             <ul className='flex'>
                 <li className='mr-6'>
                     <Link to={`/notes`} className='text-white hover:text-blue-800'>
@@ -28,6 +30,27 @@ const Navbar = ({ authUser, logOut }) => {
                 </li>
             </ul>
             <div className='flex flex-wrap'>
+                <div className='flex items-center gap-4 mr-2' onClick={() => navigate('/profile')}>
+                    <Avatar src='https://docs.material-tailwind.com/img/face-2.jpg' alt='avatar' />
+                    <div>
+                        <Typography variant='h6' color='white'>
+                            {authUser.name}
+                        </Typography>
+                    </div>
+                </div>
+
+                {/* <Button
+                    className={`flex items-center gap-2 capitalize shadow-none ${isDarkMode ? 'bg-gray-800' : 'bg-blue-600'}`}
+                    onClick={() => navigate('/profile')}>
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-6 h-6'>
+                        <path
+                            fillRule='evenodd'
+                            d='M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z'
+                            clipRule='evenodd'
+                        />
+                    </svg>
+                    {authUser.name}
+                </Button> */}
                 <IconButton variant='text' color='white' size='lg' className='mr-1'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -59,15 +82,7 @@ const Navbar = ({ authUser, logOut }) => {
                         </svg>
                     )}
                 </IconButton>
-                <IconButton variant='text' size='lg' className='mr-1' onClick={() => navigate('/profile')}>
-                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-6 h-6'>
-                        <path
-                            fillRule='evenodd'
-                            d='M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z'
-                            clipRule='evenodd'
-                        />
-                    </svg>
-                </IconButton>
+
                 <IconButton variant='text' size='lg' className='mr-1' onClick={logOut}>
                     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-6 h-6'>
                         <path
@@ -80,6 +95,11 @@ const Navbar = ({ authUser, logOut }) => {
             </div>
         </div>
     );
+};
+
+Navbar.propTypes = {
+    authUser: PropTypes.object,
+    logOut: PropTypes.func,
 };
 
 export default Navbar;

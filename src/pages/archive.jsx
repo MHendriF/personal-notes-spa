@@ -1,10 +1,9 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncGetArchivedNotes, asyncSearchArchivedNotes } from '../redux/states/notes/action';
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
-import { useDispatch } from 'react-redux';
-import { asyncGetArchivedNotes, asyncSearchArchivedNotes } from '../redux/states/notes/action';
-import { useSelector } from 'react-redux';
 
 const ArchivePage = () => {
     const dispatch = useDispatch();

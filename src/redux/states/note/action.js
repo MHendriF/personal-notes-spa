@@ -52,9 +52,7 @@ export const asyncAddNote = (data) => {
         dispatch(showLoading());
         try {
             const response = await api.addNote(data);
-            const note = dispatch(addNoteActionCreator(response));
-            console.log('asyncGetNote : ', response);
-            console.log('dispatch : ', note);
+            dispatch(addNoteActionCreator(response));
         } catch (error) {
             alert(error.message);
         }
@@ -67,9 +65,7 @@ export const asyncGetNote = (id) => {
         dispatch(showLoading());
         try {
             const response = await api.getNote(id);
-            const note = dispatch(getNoteActionCreator(response));
-            console.log('asyncGetNote : ', response);
-            console.log('dispatch : ', note);
+            dispatch(getNoteActionCreator(response));
         } catch (error) {
             alert(error.message);
         }
@@ -82,9 +78,7 @@ export const asyncDeleteNote = (id) => {
         dispatch(showLoading());
         try {
             const response = await api.deleteNote(id);
-            const note = dispatch(deleteNoteActionCreator(response));
-            console.log('asyncDeleteNote : ', response);
-            console.log('dispatch : ', note);
+            dispatch(deleteNoteActionCreator(response));
         } catch (error) {
             alert(error.message);
         }
@@ -98,7 +92,6 @@ export const asyncArchiveNote = (id) => {
         dispatch(archiveNoteActionCreator(id));
         try {
             await api.archiveNote(id);
-            console.log('asyncArchiveNote : ');
         } catch (error) {
             alert(error.message);
         }
@@ -112,7 +105,6 @@ export const asyncUnarchiveNote = (id) => {
         dispatch(unarchiveNoteActionCreator(id));
         try {
             await api.unarchiveNote(id);
-            console.log('asyncUnarchiveNote : ');
         } catch (error) {
             alert(error.message);
         }

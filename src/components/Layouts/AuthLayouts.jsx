@@ -1,8 +1,7 @@
-import { useContext } from 'react';
+import { useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import { Typography } from '@material-tailwind/react';
 
 const AuthLayouts = (props) => {
