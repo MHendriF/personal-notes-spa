@@ -2,9 +2,8 @@ import LoadingBar from 'react-redux-loading-bar';
 
 const Loading = () => {
     return (
-        <div className='loading'>
-            {/* @TODO: use react-redux-loading-bar to show loading bar */}
-            <LoadingBar />
+        <div className='top-0 sticky'>
+            <LoadingBar style={{ height: '5px' }} />
         </div>
     );
 };

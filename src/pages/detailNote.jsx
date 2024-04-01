@@ -3,15 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncArchiveNote, asyncDeleteNote, asyncGetNote, asyncUnarchiveNote } from '../redux/states/note/action';
 import { DarkMode } from '../context/DarkMode';
+import LocaleContext from '../context/LocaleContext';
 import { showFormattedDate } from '../utils';
-
-import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
-import { PlusIcon, PencilSquareIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { Chip, IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction, Typography } from '@material-tailwind/react';
+import { PlusIcon, ArchiveBoxArrowDownIcon, ArchiveBoxXMarkIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 const DetailNotePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
     const { id } = useParams();
     const { note = null } = useSelector((states) => states);
 
@@ -41,6 +42,14 @@ const DetailNotePage = () => {
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='flex items-center justify-center pt-20'>
                     <div className='w-full mx-40 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+                        {note.archived && (
+                            <Chip
+                                className='flex w-min items-center justify-center'
+                                variant='ghost'
+                                size='lg'
+                                value={`${locale === 'id' ? 'Diarsipkan' : 'Archived'}`}
+                            />
+                        )}
                         <Typography variant='h1' color='blue-gray'>
                             {note.title}
                         </Typography>
