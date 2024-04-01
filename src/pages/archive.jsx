@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncGetArchivedNotes, asyncSearchArchivedNotes } from '../redux/states/notes/action';
+import { asyncSearchArchivedNotes } from '../redux/states/notes/action';
 import { DarkMode } from '../context/DarkMode';
 import LocaleContext from '../context/LocaleContext';
 import CardNote from '../components/Fragments/CardNote';
@@ -14,12 +14,8 @@ const ArchivePage = () => {
     const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
-        dispatch(asyncGetArchivedNotes());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(asyncSearchArchivedNotes(keyword));
-    }, [keyword]);
+    }, [dispatch, keyword]);
 
     const handleSearch = (e) => {
         let char = e.target.value;

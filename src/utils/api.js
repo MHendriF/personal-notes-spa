@@ -93,7 +93,6 @@ const api = (() => {
             throw new Error(message);
         }
 
-        console.log('responseJson : ', responseJson.data);
         return responseJson.data;
     }
 
@@ -119,7 +118,6 @@ const api = (() => {
             throw new Error(message);
         }
 
-        console.log('responseJson : ', responseJson.data);
         return responseJson.data;
     }
 
@@ -133,7 +131,6 @@ const api = (() => {
             throw new Error(message);
         }
 
-        console.log('responseJson : ', responseJson.data);
         return responseJson.data;
     }
 
@@ -145,7 +142,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-        console.log('responseJson : ', responseJson);
+
         if (status !== 'success') {
             throw new Error(message);
         }
@@ -159,7 +156,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-        console.log('responseJson : ', responseJson);
+
         if (status !== 'success') {
             throw new Error(message);
         }
@@ -173,7 +170,7 @@ const api = (() => {
         const responseJson = await response.json();
 
         const { status, message } = responseJson;
-        console.log('responseJson : ', responseJson);
+
         if (status !== 'success') {
             throw new Error(message);
         }

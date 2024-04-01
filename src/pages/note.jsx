@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncGetActiveNotes, asyncSearchActiveNotes } from '../redux/states/notes/action';
+import { asyncSearchActiveNotes } from '../redux/states/notes/action';
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
@@ -14,12 +14,8 @@ const NotePage = () => {
     const { notes = [] } = useSelector((states) => states);
 
     useEffect(() => {
-        dispatch(asyncGetActiveNotes());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(asyncSearchActiveNotes(keyword));
-    }, [keyword]);
+    }, [dispatch, keyword]);
 
     const handleSearch = (e) => {
         let char = e.target.value;
