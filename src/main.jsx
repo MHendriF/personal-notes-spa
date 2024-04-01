@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <BrowserRouter>
             <React.StrictMode>
                 <DarkModeContextProvider>
-                    <LocaleProvider>
+                    <LocaleProvider value={localStorage.getItem('locale') || 'id'}>
                         <App />
                     </LocaleProvider>
                 </DarkModeContextProvider>

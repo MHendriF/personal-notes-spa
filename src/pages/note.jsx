@@ -4,10 +4,12 @@ import { asyncGetActiveNotes, asyncSearchActiveNotes } from '../redux/states/not
 import { DarkMode } from '../context/DarkMode';
 import CardNote from '../components/Fragments/CardNote';
 import InputForm from '../components/Elements/Inputs/InputForm';
+import LocaleContext from '../context/LocaleContext';
 
 const NotePage = () => {
     const dispatch = useDispatch();
     const { isDarkMode } = useContext(DarkMode);
+    const { locale } = useContext(LocaleContext);
     const [keyword, setKeyword] = useState('');
     const { notes = [] } = useSelector((states) => states);
 
@@ -21,7 +23,6 @@ const NotePage = () => {
 
     const handleSearch = (e) => {
         let char = e.target.value;
-        console.log(char);
         setKeyword(char);
     };
 
@@ -30,18 +31,20 @@ const NotePage = () => {
             <div className={`w-full min-h-screen  ${isDarkMode && 'bg-gray-900'}`}>
                 <div className='w-full pt-20 px-20'>
                     <InputForm
-                        label='Search'
+                        label={locale === 'id' ? 'Pencarian' : 'Search'}
                         name='search'
                         type='text'
                         value={keyword}
-                        placeholder='Search by title....'
+                        placeholder={locale === 'id' ? 'Cari berdasarkan judul...' : 'Search by title...'}
                         onInput={(e) => handleSearch(e)}
                         required={false}
                         color={isDarkMode ? 'white' : 'gray'}
                     />
                 </div>
 
-                <h1 className={`text-3xl font-bold mb-2 pt-10 ml-20 ${isDarkMode ? 'text-white' : 'text-blue-600'}`}>Notes</h1>
+                <h1 className={`text-3xl font-bold mb-2 pt-10 ml-20 ${isDarkMode ? 'text-white' : 'text-blue-600'}`}>
+                    {locale === 'id' ? 'Catatan' : 'Notes'}
+                </h1>
                 <div className='flex flex-wrap w-full mx-20'>
                     {notes.length > 0 &&
                         notes.map((note) => (
@@ -53,7 +56,7 @@ const NotePage = () => {
                 </div>
                 {notes.length === 0 && (
                     <div className={`w-full flex items-center justify-center pb-20 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}>
-                        {`${keyword.length > 0 ? `--- Your search results "${keyword}" is empty ---` : `--- Your Notes is empty ---`}`}
+                        {locale === 'id' ? `--- Catatan kosong ---` : `--- Your notes is empty ---`}
                     </div>
                 )}
             </div>

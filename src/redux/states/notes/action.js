@@ -45,9 +45,7 @@ export const asyncGetActiveNotes = () => {
         dispatch(showLoading());
         try {
             const response = await api.getActiveNotes();
-            const notes = dispatch(getActiveNotesActionCreator(response));
-            console.log('asyncGetActiveNotes : ', response);
-            console.log('dispatch : ', notes);
+            dispatch(getActiveNotesActionCreator(response));
         } catch (error) {
             alert(error.message);
         }
@@ -60,9 +58,7 @@ export const asyncGetArchivedNotes = () => {
         dispatch(showLoading());
         try {
             const response = await api.getArchivedNotes();
-            const notes = dispatch(getArchivedNotesActionCreator(response));
-            console.log('asyncGetArchivedNotes : ', response);
-            console.log('dispatch : ', notes);
+            dispatch(getArchivedNotesActionCreator(response));
         } catch (error) {
             alert(error.message);
         }
@@ -75,9 +71,7 @@ export const asyncSearchActiveNotes = (keyword) => {
         dispatch(showLoading());
         try {
             const notes = await api.getActiveNotes();
-            const result = dispatch(searchActiveNotesActionCreator(notes, keyword));
-            console.log('asyncSearchActiveNotes : ', notes);
-            console.log('dispatch : ', result);
+            dispatch(searchActiveNotesActionCreator(notes, keyword));
         } catch (error) {
             alert(error.message);
         }
@@ -90,9 +84,7 @@ export const asyncSearchArchivedNotes = (keyword) => {
         dispatch(showLoading());
         try {
             const notes = await api.getArchivedNotes();
-            const result = dispatch(searchArchivedNotesActionCreator(notes, keyword));
-            console.log('asyncSearchArchivedNotes : ', notes);
-            console.log('dispatch : ', result);
+            dispatch(searchArchivedNotesActionCreator(notes, keyword));
         } catch (error) {
             alert(error.message);
         }
