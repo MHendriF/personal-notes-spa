@@ -4,7 +4,6 @@ import ThemeContext from '../context/ThemeContext';
 
 const CreateNotePage = () => {
     const { theme } = useContext(ThemeContext);
-    console.log('isDarkMode', theme);
 
     return (
         <Fragment>

@@ -7,8 +7,10 @@ import ThemeContext from '../../context/ThemeContext';
 import LocaleContext from '../../context/LocaleContext';
 import ButtonCostum from '../Elements/Buttons';
 import InputForm from '../Elements/Inputs/InputForm';
+import { useSelector } from 'react-redux';
 
 const FormLogin = () => {
+    const { authUser = null } = useSelector((states) => states);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const emailRef = useRef(null);
@@ -21,6 +23,12 @@ const FormLogin = () => {
         emailRef.current.focus();
     }, []);
 
+    useEffect(() => {
+        if (authUser) {
+            navigate('/');
+        }
+    }, [authUser]);
+
     const handleLogin = (e) => {
         e.preventDefault();
         const data = {
@@ -28,7 +36,6 @@ const FormLogin = () => {
             password: e.target.password.value,
         };
         dispatch(asyncSetAuthUser(data));
-        navigate(`/`);
     };
 
     return (

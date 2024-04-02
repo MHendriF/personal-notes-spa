@@ -20,15 +20,6 @@ export const unsetAuthUserActionCreator = () => {
     };
 };
 
-export const getAuthUserActionCreator = () => {
-    return {
-        type: ActionType.GET_AUTH_USER,
-        payload: {
-            authUser,
-        },
-    };
-};
-
 export const asyncSetAuthUser = (data) => {
     return async (dispatch) => {
         dispatch(showLoading());
