@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { showFormattedDate } from '../../utils';
 import { useContext } from 'react';
 import ThemeContext from '../../context/ThemeContext';
+import LocaleContext from '../../context/LocaleContext';
 
 const CardNote = (props) => {
     const { theme } = useContext(ThemeContext);
@@ -18,13 +19,19 @@ const CardNote = (props) => {
 
 const Header = (props) => {
     const { id, title, createdAt } = props;
+    const { locale } = useContext(LocaleContext);
+
+    const getFormatDate = () => {
+        if (locale === 'id') return 'id-ID';
+        else return 'en-US';
+    };
 
     return (
         <div className='px-5 py-5 pb-5'>
             <Link to={`/notes/${id}`} className='dark:text-white hover:underline'>
                 <h5 className='text-xl font-semibold tracking-tight '>{title.length > 30 ? `${title.substring(0, 29)}...` : title}</h5>
             </Link>
-            <p className='text-xs '>{showFormattedDate(createdAt)}</p>
+            <p className='text-xs '>{showFormattedDate(createdAt, getFormatDate())}</p>
         </div>
     );
 };

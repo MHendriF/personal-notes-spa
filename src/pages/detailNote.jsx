@@ -37,6 +37,11 @@ const DetailNotePage = () => {
         }
     };
 
+    const getFormatDate = () => {
+        if (locale === 'id') return 'id-ID';
+        else return 'en-US';
+    };
+
     return (
         <Fragment>
             <div className={`w-full min-h-screen  ${theme === 'dark' && 'bg-gray-900'}`}>
@@ -54,7 +59,7 @@ const DetailNotePage = () => {
                             {note.title}
                         </Typography>
                         <Typography variant='small' color='gray' className='mb-4'>
-                            {showFormattedDate(note.createdAt)}
+                            {showFormattedDate(note.createdAt, getFormatDate())}
                         </Typography>
                         <Typography variant='paragraph' color='gray' className='mb-1'>
                             {note.body}
