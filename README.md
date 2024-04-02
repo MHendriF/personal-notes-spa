@@ -11,10 +11,10 @@ This project is a simple personal notes app build with react.js
 2. Clone repository
 
     ```shell
-    git clone git@github.com:MHendriF/personal-notes.git
+    git clone git@github.com:MHendriF/personal-notes-spa.git
     ```
 
-3. Navigate to working directory personal-notes
+3. Navigate to working directory personal-notes-spa
 
     ```shell
     cd personal-notes-spa
