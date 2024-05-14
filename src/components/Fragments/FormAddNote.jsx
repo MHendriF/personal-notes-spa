@@ -31,7 +31,7 @@ const FormAddNote = () => {
         };
 
         dispatch(asyncAddNote(data));
-        navigate(`/notes`);
+        navigate(`/`);
     };
 
     return (
